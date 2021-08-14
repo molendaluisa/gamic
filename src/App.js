@@ -12,20 +12,18 @@ export default function App() {
 
   return (
     <div className="App">
-      <div className="app-container d-flex-center flex-column">
-        {ready ? null :
-          <div>
-            <h1 className="logo-white">Gamic</h1>
-            <div className="form-container d-flex-center flex-column">
-              <input type="text" placeholder="Game PIN" className="input" />
-              <input type="text" placeholder="Nickname" className="input" />
-              <button className="btn btn-primary" onClick={checkEnter}>Enter</button>
-            </div>
+      {ready ? null :
+        <div className="d-flex-center flex-column app-container">
+          <h1 className="logo-white">Gamic</h1>
+          <div className="form-container d-flex-center flex-column">
+            <input type="text" placeholder="Game PIN" className="input" />
+            <input type="text" placeholder="Nickname" className="input" />
+            <button className="btn btn-primary" onClick={checkEnter}>Enter</button>
           </div>
-        }
-        {ready ? <Combate /> : null}
-      </div>
-    </div>
+        </div>
+      }
+      {ready ? <Combate /> : null}
+    </div >
   );
 }
 

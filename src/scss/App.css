@@ -31,9 +31,6 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -109,10 +106,17 @@ body {
   outline-color: black;
 }
 
-.app-container {
+.App {
   width: 100vw;
   height: 100vh;
   background: linear-gradient(135deg, #274754 0%, #2a9d90 22%, #e8c468 52%, #f4a462 77%, #e76e50 100%);
+}
+
+.app-container {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100vh;
 }
 
 .form-container {
