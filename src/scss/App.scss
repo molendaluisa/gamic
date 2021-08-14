@@ -1,0 +1,21 @@
+@import "variables";
+@import "globals";
+
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  background: $gradient;
+}
+.form-container {
+  background-color: white;
+  width: 288px;
+  height: 240px;
+  padding: 25px;
+  border-radius: 5px;
+  justify-content: space-around;
+}
+
+input,
+button {
+  width: 100%;
+}
