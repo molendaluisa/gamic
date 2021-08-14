@@ -126,51 +126,54 @@ body {
   }
 }
 
-.App {
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(135deg, #274754 0%, #2a9d90 22%, #e8c468 52%, #f4a462 77%, #e76e50 100%);
-}
-
-.app-container {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.form-container {
-  background-color: white;
-  width: 288px;
-  height: 240px;
-  padding: 25px;
-  border-radius: 5px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-}
-
-input,
-button {
+.Contender {
   width: 100%;
+  height: 100%;
 }
 
-@media (max-device-width: 812px) and (orientation: landscape) {
-  .app-container {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
+.polaroid {
+  background: #fff;
+  padding: 16px;
+  -webkit-box-shadow: 0 3px 19px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 3px 19px rgba(0, 0, 0, 0.2);
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.polaroid > img {
+  max-width: 100%;
+  height: auto;
+}
+
+.polaroid:hover {
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
+  cursor: pointer;
+}
+
+.caption {
+  font-size: 28px;
+  text-align: center;
+  line-height: 32px;
+  font-weight: 300;
+  padding: 10px 0;
+}
+
+@media (max-device-width: 812px) {
+  .caption {
+    font-size: 16px;
   }
 }
-/*# sourceMappingURL=App.css.map */
+
+@media (max-device-width: 812px) and (orientation: portrait) {
+  .Contender {
+    height: 80%;
+  }
+  .polaroid {
+    padding: 14px;
+  }
+  .caption {
+    padding: 6px 0;
+  }
+}
+/*# sourceMappingURL=Contender.css.map */

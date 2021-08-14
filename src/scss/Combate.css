@@ -36,20 +36,6 @@ body {
           align-items: center;
 }
 
-.flex-row {
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-}
-
-.flex-column {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
 .btn {
   padding: 4px 16px;
   border: 1px solid #444;
@@ -69,6 +55,7 @@ body {
 .btn-primary:hover {
   background-color: white;
   color: #444;
+  cursor: pointer;
 }
 
 .input {
@@ -106,9 +93,46 @@ body {
   outline-color: black;
 }
 
+.overlay {
+  opacity: 0.5;
+}
+
+.no-events:hover {
+  pointer-events: none;
+}
+
+@media (max-device-width: 812px) {
+  .logo-white {
+    font-size: 52px;
+  }
+  .input {
+    height: 36px;
+  }
+  .input::-webkit-input-placeholder,
+  .btn {
+    font-size: 14px;
+  }
+  .input:-ms-input-placeholder,
+  .btn {
+    font-size: 14px;
+  }
+  .input::-ms-input-placeholder,
+  .btn {
+    font-size: 14px;
+  }
+  .input::placeholder,
+  .btn {
+    font-size: 14px;
+  }
+}
+
 .Combate {
   width: 100vw;
   height: 100vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -128,6 +152,23 @@ h1 {
   font-size: 32px;
 }
 
+.middle-section {
+  padding: 0 200px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.versus {
+  font-size: 64px;
+  border-radius: 50%;
+  background-color: white;
+  padding: 30px;
+  font-family: "Chelsea Market", cursive;
+  color: #444;
+  margin: 0 80px;
+}
+
 ul {
   list-style-type: none;
   padding: 20px 0;
@@ -138,23 +179,113 @@ ul {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 li {
   padding: 0 30px;
   font-size: 24px;
+  width: 600px;
+}
+
+li:last-child {
+  text-align: end;
+}
+
+#countdown {
+  position: relative;
+  margin: auto;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+}
+
+#countdown-number {
+  color: #444;
+  display: inline-block;
+  line-height: 40px;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  -webkit-transform: rotateY(-180deg) rotateZ(-90deg);
+          transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+svg circle {
+  stroke-dasharray: 113px;
+  stroke-dashoffset: 0px;
+  stroke-linecap: round;
+  stroke-width: 2px;
+  stroke: #444;
+  fill: none;
+  -webkit-animation: countdown 30s linear infinite forwards;
+          animation: countdown 30s linear infinite forwards;
+}
+
+@-webkit-keyframes countdown {
+  from {
+    stroke-dashoffset: 0px;
+  }
+  to {
+    stroke-dashoffset: 113px;
+  }
+}
+
+@keyframes countdown {
+  from {
+    stroke-dashoffset: 0px;
+  }
+  to {
+    stroke-dashoffset: 113px;
+  }
 }
 
 @media (max-device-width: 812px) {
   h1 {
     padding: 10px 0;
-    font-size: 24px;
+    font-size: 20px;
   }
   ul {
     padding: 10px 0;
   }
   li {
-    font-size: 18px;
+    font-size: 16px;
+  }
+  .middle-section {
+    padding: 0 50px;
+  }
+  .versus {
+    font-size: 36px;
+    padding: 15px;
+    margin: 0 20px;
+  }
+}
+
+@media (max-device-width: 812px) and (orientation: portrait) {
+  h1 {
+    font-size: 16px;
+  }
+  .middle-section {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding: 10px 50px;
+  }
+  .versus {
+    font-size: 24px;
+    padding: 10px;
+    margin: 5px 80px;
+  }
+  li {
+    font-size: 12px;
   }
 }
 /*# sourceMappingURL=Combate.css.map */

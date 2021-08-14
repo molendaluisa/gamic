@@ -4,6 +4,7 @@
 .Combate {
   width: 100vw;
   height: 100vh;
+  flex-direction: column;
   justify-content: space-between;
 }
 .bar {
@@ -20,28 +21,118 @@ h1 {
   font-size: 32px;
 }
 
+.middle-section {
+  padding: 0 200px;
+  justify-content: space-between;
+}
+
+.versus {
+  font-size: 64px;
+  border-radius: 50%;
+  background-color: white;
+  padding: 30px;
+  font-family: $chelsea;
+  color: $darkGray;
+  margin: 0 80px;
+}
+
 ul {
   list-style-type: none;
   padding: 20px 0;
   margin: 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 li {
   padding: 0 30px;
   font-size: 24px;
+  width: 600px;
+}
+
+li:last-child {
+  text-align: end;
+}
+
+#countdown {
+  position: relative;
+  margin: auto;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+}
+
+#countdown-number {
+  color: $darkGray;
+  display: inline-block;
+  line-height: 40px;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+svg circle {
+  stroke-dasharray: 113px;
+  stroke-dashoffset: 0px;
+  stroke-linecap: round;
+  stroke-width: 2px;
+  stroke: $darkGray;
+  fill: none;
+  animation: countdown 30s linear infinite forwards;
+}
+
+@keyframes countdown {
+  from {
+    stroke-dashoffset: 0px;
+  }
+  to {
+    stroke-dashoffset: 113px;
+  }
 }
 
 @media (max-device-width: 812px) {
   h1 {
     padding: 10px 0;
-    font-size: 24px;
+    font-size: 20px;
   }
   ul {
     padding: 10px 0;
   }
   li {
-    font-size: 18px;
+    font-size: 16px;
+  }
+  .middle-section {
+    padding: 0 50px;
+  }
+  .versus {
+    font-size: 36px;
+    padding: 15px;
+    margin: 0 20px;
+  }
+}
+
+@media (max-device-width: 812px) and (orientation: portrait) {
+  h1 {
+    font-size: 16px;
+  }
+
+  .middle-section {
+    flex-direction: column;
+    padding: 10px 50px;
+  }
+  .versus {
+    font-size: 24px;
+    padding: 10px;
+    margin: 5px 80px;
+  }
+  li {
+    font-size: 12px;
   }
 }

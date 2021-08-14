@@ -31,14 +31,6 @@ body {
   align-items: center;
 }
 
-.flex-row {
-  flex-direction: row;
-}
-
-.flex-column {
-  flex-direction: column;
-}
-
 .btn {
   padding: 4px 16px;
   border: 1px solid $darkGray;
@@ -57,6 +49,7 @@ body {
 .btn-primary:hover {
   background-color: white;
   color: $darkGray;
+  cursor: pointer;
 }
 
 .input {
@@ -74,4 +67,25 @@ body {
 
 .input:focus-visible {
   outline-color: black;
+}
+
+.overlay {
+  opacity: 0.5;
+}
+
+.no-events:hover {
+  pointer-events: none;
+}
+
+@media (max-device-width: 812px) {
+  .logo-white {
+    font-size: 52px;
+  }
+  .input {
+    height: 36px;
+  }
+  .input::placeholder,
+  .btn {
+    font-size: 14px;
+  }
 }
