@@ -1,0 +1,27 @@
+//Fonts Family
+$chelsea: "Chelsea Market", cursive;
+$open: "Open Sans", sans-serif;
+
+//Font Weight
+$light: 300;
+$regular: 400;
+$semiBold: 600;
+$bold: 700;
+
+//Pallete
+$darkGray: #444;
+$charcoal: #264653;
+$persianGreen: #2a9d8f;
+$yellowCrayola: #e9c46a;
+$sandyBrown: #f4a261;
+$bruntSienna: #e76f51;
+
+//Gradient
+$gradient: linear-gradient(
+  135deg,
+  hsla(197, 37%, 24%, 1) 0%,
+  hsla(173, 58%, 39%, 1) 22%,
+  hsla(43, 74%, 66%, 1) 52%,
+  hsla(27, 87%, 67%, 1) 77%,
+  hsla(12, 76%, 61%, 1) 100%
+);
