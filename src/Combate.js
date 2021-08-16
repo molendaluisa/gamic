@@ -1,16 +1,26 @@
 import React, { useState } from "react";
 import './scss/Combate.css';
 import Contender from "./Contender";
+import Winner from "./Winner";
 import { test, getGame, submitVote, finishRound } from './backend/GameSetup.js';
 
 
 export default function Combate(props) {
+<<<<<<< HEAD
   const [counter, setCounter] = useState(10)
   const [overlayLeft, setOverlayLeft] = useState(null)
   const [overlayRight, setOverlayRight] = useState(null)
   const [noEvents, setNoEvents] = useState(null)
+=======
+
+
+  let timer = 5;
+  const [counter, setCounter] = useState(timer)
+  const [overlay, setOverlay] = useState(false)
+>>>>>>> 9720ffc7b394de132043e8aeaf6acf789aa4a0d1
   const [game, setGame] = useState(getGame(props.gamePin))
   const [gameOver, setGameOver] = useState(false)
+
 
   React.useEffect(() => {
     if (counter === 0) {
@@ -57,12 +67,18 @@ export default function Combate(props) {
       setGameOver(true)
     } else {
       setGame(getGame(game.pin))
+<<<<<<< HEAD
       setCounter(10)
     }
     setOverlayLeft(null)
     setOverlayRight(null)
     setNoEvents(null)
     
+=======
+      setCounter(timer)
+    }
+
+>>>>>>> 9720ffc7b394de132043e8aeaf6acf789aa4a0d1
   }
 
   return (
@@ -70,16 +86,39 @@ export default function Combate(props) {
 
       {/* NAV */}
       <nav className="bar">
-        <h1>Round #{game.currentRound} - What would you save?</h1>
+        <h1>{gameOver ? "Winner" : `Round #${game.currentRound} - What would you save?`} </h1>
       </nav>
 
 
       {/* MIDDLE SECTION */}
+<<<<<<< HEAD
       <div className="middle-section d-flex-center">
         <Contender optionInfo={game.optionA} handleSelection={handleSelectionLeft} status={overlayLeft} noEvents={noEvents}/>
         <div className="versus"> VS </div>
         <Contender optionInfo={game.optionB} handleSelection={handleSelectionRight} status={overlayRight} noEvents={noEvents}/>
 
+=======
+      <div className="middle-section">
+        {gameOver ?
+          <div className="winner-wrapper">
+            <Winner optionInfo={game.roundWinner} gameOver={gameOver} />
+          </div>
+          :
+          <div className="battle-wrapper d-flex-center">
+            <div className={overlay ? "contender-0 overlay no-events" : "contender-0"} onClick={applyOverlay}>
+              <Contender optionInfo={game.optionA} handleSelection={handleSelectionLeft} />
+            </div>
+
+            <div className="versus">
+              VS
+            </div>
+
+            <div className="contender-1">
+              <Contender optionInfo={game.optionB} handleSelection={handleSelectionRight} />
+            </div>
+          </div>
+        }
+>>>>>>> 9720ffc7b394de132043e8aeaf6acf789aa4a0d1
       </div>
 
       {/* FOOTER */}
