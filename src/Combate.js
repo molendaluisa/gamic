@@ -22,7 +22,7 @@ export default function Combate() {
 
       {/* NAV */}
       <nav className="bar">
-        <h1>Round #1 - Who's going to rule the world?</h1>
+        <h1>Round #1 - What would you save?</h1>
       </nav>
 
 
