@@ -27,15 +27,15 @@ const gameSetup = {
         },
         {
             description: "Treadmill",
-            imageUrl: "https://images.pexels.com/photos/3757957/pexels-photo-3757957.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+            imageUrl: "https://images.pexels.com/photos/3757957/pexels-photo-3757957.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=308&w=462&fit=crop"
         },
         {
             description: "Festivals",
-            imageUrl: "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+            imageUrl: "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=308&w=462&fit=crop"
         },
         {
             description: "Books",
-            imageUrl: "https://images.pexels.com/photos/3494806/pexels-photo-3494806.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+            imageUrl: "https://images.pexels.com/photos/3494806/pexels-photo-3494806.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=308&w=462&fit=crop"
         },
     ],
     totalRounds: 7
@@ -145,7 +145,7 @@ function getRoundWinner(gamePin) {
 // var round1Winner = getRoundWinner("ABC01")
 // console.log(JSON.stringify(round1Winner, null, 2))
 
-export function finishRound(gamePin){
+export function finishRound(gamePin) {
     var game = getGame(gamePin)
     var roundWinner = getRoundWinner(gamePin)
 
@@ -162,7 +162,7 @@ export function finishRound(gamePin){
             game.optionB = newContender[0]
             game.currentRound = game.currentRound + 1
         }
-        
+
 
 
     } else {

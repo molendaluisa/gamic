@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './scss/Combate.css';
 import Contender from "./Contender";
-import { test, getGame, submitVote, finishRound} from './backend/GameSetup.js';
+import { test, getGame, submitVote, finishRound } from './backend/GameSetup.js';
 
 
 export default function Combate(props) {
@@ -49,6 +49,7 @@ export default function Combate(props) {
     setCounter(5)
   }
 
+
   return (
     <div className="Combate d-flex-center flex-column">
 
@@ -61,7 +62,7 @@ export default function Combate(props) {
       {/* MIDDLE SECTION */}
       <div className="middle-section d-flex-center">
         <div className={overlay ? "contender-0 overlay no-events" : "contender-0"} onClick={applyOverlay}>
-          <Contender optionInfo={game.optionA} handleSelection={handleSelectionLeft}/>
+          <Contender optionInfo={game.optionA} handleSelection={handleSelectionLeft} />
         </div>
 
         <div className="versus">
@@ -69,7 +70,7 @@ export default function Combate(props) {
         </div>
 
         <div className="contender-1">
-          <Contender optionInfo={game.optionB} handleSelection={handleSelectionRight}/>
+          <Contender optionInfo={game.optionB} handleSelection={handleSelectionRight} />
         </div>
 
       </div>
@@ -77,7 +78,7 @@ export default function Combate(props) {
       {/* FOOTER */}
       <footer className="bar">
         <ul>
-        <li>{game.currentRound}/{game.totalRounds}</li>
+          <li>{game.currentRound}/{game.totalRounds}</li>
           <li className="counter"><div id="countdown">
             <div id="countdown-number">{counter}</div>
             <svg>
