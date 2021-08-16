@@ -21,7 +21,7 @@ h1 {
   font-size: 32px;
 }
 
-.middle-section {
+.battle-wrapper {
   padding: 0 200px;
   justify-content: space-between;
 }
@@ -108,7 +108,7 @@ svg circle {
   li {
     font-size: 16px;
   }
-  .middle-section {
+  .battle-wrapper {
     padding: 0 50px;
   }
   .versus {
@@ -123,7 +123,7 @@ svg circle {
     font-size: 16px;
   }
 
-  .middle-section {
+  .battle-wrapper {
     flex-direction: column;
     padding: 10px 50px;
   }

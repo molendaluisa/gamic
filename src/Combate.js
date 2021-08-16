@@ -7,10 +7,13 @@ import { test, getGame, submitVote, finishRound } from './backend/GameSetup.js';
 
 export default function Combate(props) {
 
-  const [counter, setCounter] = useState(5)
+
+  let timer = 5;
+  const [counter, setCounter] = useState(timer)
   const [overlay, setOverlay] = useState(false)
   const [game, setGame] = useState(getGame(props.gamePin))
   const [gameOver, setGameOver] = useState(false)
+
 
   React.useEffect(() => {
     if (counter === 0) {
@@ -49,7 +52,7 @@ export default function Combate(props) {
       setGameOver(true)
     } else {
       setGame(getGame(game.pin))
-      setCounter(5)
+      setCounter(timer)
     }
 
   }
@@ -59,28 +62,31 @@ export default function Combate(props) {
 
       {/* NAV */}
       <nav className="bar">
-        <h1>Round #{game.currentRound} - What would you save?</h1>
+        <h1>{gameOver ? "Winner" : `Round #${game.currentRound} - What would you save?`} </h1>
       </nav>
 
 
       {/* MIDDLE SECTION */}
-      <div className="middle-section d-flex-center">
+      <div className="middle-section">
+        {gameOver ?
+          <div className="winner-wrapper">
+            <Winner optionInfo={game.roundWinner} gameOver={gameOver} />
+          </div>
+          :
+          <div className="battle-wrapper d-flex-center">
+            <div className={overlay ? "contender-0 overlay no-events" : "contender-0"} onClick={applyOverlay}>
+              <Contender optionInfo={game.optionA} handleSelection={handleSelectionLeft} />
+            </div>
 
-        <div className={overlay ? "contender-0 overlay no-events" : "contender-0"} onClick={applyOverlay}>
-          <Contender optionInfo={game.optionA} handleSelection={handleSelectionLeft} />
-        </div>
+            <div className="versus">
+              VS
+            </div>
 
-        <div className="versus">
-          VS
-        </div>
-
-        <div className="contender-1">
-          <Contender optionInfo={game.optionB} handleSelection={handleSelectionRight} />
-        </div>
-
-        <div className="winner-wrapper">
-          <Winner gameOver={gameOver} />
-        </div>
+            <div className="contender-1">
+              <Contender optionInfo={game.optionB} handleSelection={handleSelectionRight} />
+            </div>
+          </div>
+        }
       </div>
 
       {/* FOOTER */}

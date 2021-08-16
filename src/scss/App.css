@@ -101,6 +101,35 @@ body {
   pointer-events: none;
 }
 
+.polaroid {
+  background: #fff;
+  padding: 16px;
+  -webkit-box-shadow: 0 3px 19px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 3px 19px rgba(0, 0, 0, 0.2);
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  max-width: 500px;
+}
+
+.polaroid > img {
+  max-width: 100%;
+  height: auto;
+}
+
+.polaroid:hover {
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
+  cursor: pointer;
+}
+
+.caption {
+  font-size: 28px;
+  text-align: center;
+  line-height: 32px;
+  font-weight: 300;
+  padding: 10px 0;
+}
+
 @media (max-device-width: 812px) {
   .logo-white {
     font-size: 52px;
@@ -123,6 +152,24 @@ body {
   .input::placeholder,
   .btn {
     font-size: 14px;
+  }
+  .polaroid {
+    max-width: 350px;
+  }
+  .caption {
+    font-size: 16px;
+  }
+}
+
+@media (max-device-width: 812px) and (orientation: portrait) {
+  .Contender {
+    height: 80%;
+  }
+  .polaroid {
+    padding: 14px;
+  }
+  .caption {
+    padding: 6px 0;
   }
 }
 

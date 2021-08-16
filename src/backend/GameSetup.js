@@ -158,7 +158,7 @@ export function finishRound(gamePin) {
         console.log("No more options to offer")
         return true
     }
-
+    game.roundWinner = getRoundWinner(gamePin)
     if (game.votesOptionA.length > game.votesOptionB.length) {
         game.optionB = newContender[0]
         game.currentRound = game.currentRound + 1
