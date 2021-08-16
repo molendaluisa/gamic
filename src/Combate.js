@@ -9,14 +9,13 @@ export default function Combate(props) {
   const [counter, setCounter] = useState(5)
   const [overlay, setOverlay] = useState(false)
   const [game, setGame] = useState(getGame(props.gamePin))
+  const [gameOver, setGameOver] = useState(false)
 
   React.useEffect(() => {
     if (counter === 0) {
-      console.log("hello work")
       goToNextRound()
     }
-    const timer =
-      counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+    const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
     return () => clearInterval(timer);
   }, [counter]);
 
@@ -44,9 +43,14 @@ export default function Combate(props) {
 
   function goToNextRound() {
     // This need to be specific per user, this version is only to test.
-    finishRound(game.pin)
-    setGame(getGame(game.pin))
-    setCounter(5)
+    var isGameOver = finishRound(game.pin)
+    if (isGameOver) {
+      setGameOver(true)
+    } else {
+      setGame(getGame(game.pin))
+      setCounter(5)
+    }
+    
   }
 
   return (
