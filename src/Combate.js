@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './scss/Combate.css';
 import Contender from "./Contender";
+import Winner from "./Winner";
 import { test, getGame, submitVote, finishRound } from './backend/GameSetup.js';
 
 
@@ -50,7 +51,7 @@ export default function Combate(props) {
       setGame(getGame(game.pin))
       setCounter(5)
     }
-    
+
   }
 
   return (
@@ -64,6 +65,7 @@ export default function Combate(props) {
 
       {/* MIDDLE SECTION */}
       <div className="middle-section d-flex-center">
+
         <div className={overlay ? "contender-0 overlay no-events" : "contender-0"} onClick={applyOverlay}>
           <Contender optionInfo={game.optionA} handleSelection={handleSelectionLeft} />
         </div>
@@ -76,6 +78,9 @@ export default function Combate(props) {
           <Contender optionInfo={game.optionB} handleSelection={handleSelectionRight} />
         </div>
 
+        <div className="winner-wrapper">
+          <Winner gameOver={gameOver} />
+        </div>
       </div>
 
       {/* FOOTER */}
