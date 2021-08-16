@@ -22,7 +22,7 @@ export default function App() {
           </div>
         </div>
       }
-      {ready ? <Combate /> : null}
+      {ready ? <Combate gamePin="ABC01" nickname="luisita"/> : null}
     </div >
   );
 }
