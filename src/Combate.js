@@ -49,7 +49,6 @@ export default function Combate(props) {
     setCounter(5)
   }
 
-
   return (
     <div className="Combate d-flex-center flex-column">
 
