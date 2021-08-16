@@ -5,9 +5,10 @@ import { test, getGame, submitVote, finishRound } from './backend/GameSetup.js';
 
 
 export default function Combate(props) {
-
-  const [counter, setCounter] = useState(5)
-  const [overlay, setOverlay] = useState(false)
+  const [counter, setCounter] = useState(10)
+  const [overlayLeft, setOverlayLeft] = useState(null)
+  const [overlayRight, setOverlayRight] = useState(null)
+  const [noEvents, setNoEvents] = useState(null)
   const [game, setGame] = useState(getGame(props.gamePin))
   const [gameOver, setGameOver] = useState(false)
 
@@ -19,17 +20,19 @@ export default function Combate(props) {
     return () => clearInterval(timer);
   }, [counter]);
 
-  function applyOverlay() {
-    setOverlay(true)
-  }
-
   function handleSelectionLeft() {
     // Once a selection is done is should not be possible to select another one
     var user = {
       nickname: props.nickname,
     }
-    submitVote(game.pin, user, game.optionA)
-    setGame(getGame(game.pin))
+
+    if (overlayLeft == null) {
+      setOverlayLeft(true)
+      setOverlayRight(false)
+      setNoEvents(true)
+      submitVote(game.pin, user, game.optionA)
+      setGame(getGame(game.pin))
+    }
   }
 
   function handleSelectionRight() {
@@ -37,8 +40,14 @@ export default function Combate(props) {
     var user = {
       nickname: props.nickname,
     }
-    submitVote(game.pin, user, game.optionB)
-    setGame(getGame(game.pin))
+
+    if (overlayRight == null) {
+      setOverlayLeft(false)
+      setOverlayRight(true)
+      setNoEvents(true)
+      submitVote(game.pin, user, game.optionB)
+      setGame(getGame(game.pin))
+    }
   }
 
   function goToNextRound() {
@@ -48,8 +57,11 @@ export default function Combate(props) {
       setGameOver(true)
     } else {
       setGame(getGame(game.pin))
-      setCounter(5)
+      setCounter(10)
     }
+    setOverlayLeft(null)
+    setOverlayRight(null)
+    setNoEvents(null)
     
   }
 
@@ -64,17 +76,9 @@ export default function Combate(props) {
 
       {/* MIDDLE SECTION */}
       <div className="middle-section d-flex-center">
-        <div className={overlay ? "contender-0 overlay no-events" : "contender-0"} onClick={applyOverlay}>
-          <Contender optionInfo={game.optionA} handleSelection={handleSelectionLeft} />
-        </div>
-
-        <div className="versus">
-          VS
-        </div>
-
-        <div className="contender-1">
-          <Contender optionInfo={game.optionB} handleSelection={handleSelectionRight} />
-        </div>
+        <Contender optionInfo={game.optionA} handleSelection={handleSelectionLeft} status={overlayLeft} noEvents={noEvents}/>
+        <div className="versus"> VS </div>
+        <Contender optionInfo={game.optionB} handleSelection={handleSelectionRight} status={overlayRight} noEvents={noEvents}/>
 
       </div>
 
