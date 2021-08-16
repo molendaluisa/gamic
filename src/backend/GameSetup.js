@@ -147,36 +147,33 @@ function getRoundWinner(gamePin) {
 
 export function finishRound(gamePin) {
     var game = getGame(gamePin)
-    var roundWinner = getRoundWinner(gamePin)
 
     if (game.options.length == 0) {
         console.log("Game over")
     }
+    // Set new optionB
+    var newContender = getOption(gamePin)
 
-    if (roundWinner != null) {
-        game.roundWinner = roundWinner
-        // Set optionA as the winner of the previous round
-        game.optionA = roundWinner
+    if (newContender.length === 0) {
+        console.log("No more options to offer")
+        return true
+    }
 
-        // Set new optionB
-        var newContender = getOption(gamePin)
-        if (newContender.length === 0) {
-            console.log("No more options to offer")
-            return true
-        } else {
-            game.optionB = newContender[0]
-            game.currentRound = game.currentRound + 1
-        }
-        
+    if (game.votesOptionA.length > game.votesOptionB.length) {
+        game.optionB = newContender[0]
+        game.currentRound = game.currentRound + 1
+    } else if (game.votesOptionB.length > game.votesOptionA.length) {
+        game.optionA = newContender[0]
+        game.currentRound = game.currentRound + 1
     } else {
-        console.log("Its a tie!, vote again")
+        console.log("It's a tie, play round again")
     }
 
     // Reset votes
     game.votesOptionA = []
     game.votesOptionB = []
-
 }
+
 // printGameInfo("ABC01")
 // finishRound("ABC01")
 // printGameInfo("ABC01")
