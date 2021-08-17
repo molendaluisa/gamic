@@ -43,6 +43,7 @@ body {
   height: 48px;
   font-family: "Chelsea Market", cursive;
   font-size: 16px;
+  text-align: center;
 }
 
 .btn-primary {
@@ -224,17 +225,45 @@ li:last-child {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+nav {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.down {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.wbutton li {
+  width: auto;
 }
 
 .waiting-center {
   color: white;
 }
 
+.join-banner {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  padding: 0 20px;
+}
+
+.link {
+  font-family: "Chelsea Market", cursive;
+  font-size: 32px;
+}
+
 p {
   font-weight: 300;
   font-size: 32px;
+}
+
+.btn-start {
+  width: 150px;
 }
 /*# sourceMappingURL=WaitingPlayers.css.map */
