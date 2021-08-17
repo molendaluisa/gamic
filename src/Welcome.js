@@ -7,7 +7,7 @@ export default function Welcome(props) {
 
       {/* NAV */}
       <nav className="bar">
-        <h1>Pancakes vs Waffles </h1>
+        <h1>Pancakes vs Waffles</h1>
       </nav>
 
 

@@ -1,0 +1,25 @@
+@import "variables";
+@import "globals";
+@import "navfot";
+
+.WaitingPlayers {
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.waiting-center {
+  color: white;
+}
+
+p {
+  font-weight: $light;
+  font-size: 32px;
+}
