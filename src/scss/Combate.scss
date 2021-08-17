@@ -1,5 +1,6 @@
 @import "variables";
 @import "globals";
+@import "navfot";
 
 .Combate {
   width: 100vw;
@@ -69,7 +70,7 @@ li:last-child {
   line-height: 40px;
 }
 
-svg {
+.circle-counter {
   position: absolute;
   top: 0;
   right: 0;

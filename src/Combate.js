@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaUserAlt } from 'react-icons/fa';
 import './scss/Combate.css';
 import Contender from "./Contender";
 import Winner from "./Winner";
@@ -6,7 +7,7 @@ import { test, getGame, submitVote, finishRound } from './backend/GameSetup.js';
 
 
 export default function Combate(props) {
-  let timer = 5;
+  let timer = 50;
   const [counter, setCounter] = useState(10)
   const [overlayLeft, setOverlayLeft] = useState(null)
   const [overlayRight, setOverlayRight] = useState(null)
@@ -100,13 +101,13 @@ export default function Combate(props) {
             <li className="counter">
               <div id="countdown">
                 <div id="countdown-number">{counter}</div>
-                <svg>
+                <svg className="circle-counter">
                   <circle r="18" cx="20" cy="20"></circle>
                 </svg>
               </div>
             </li>
           }
-          <li>Gamic - PIN: {props.gamePin}</li>
+          <li>1 <FaUserAlt /> - PIN: {props.gamePin}</li>
         </ul>
       </footer>
 

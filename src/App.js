@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './scss/App.css';
-import Combate from './Combate';
+import Welcome from './Welcome';
 
 export default function App() {
   const [ready, setReady] = useState(false);
@@ -22,7 +22,7 @@ export default function App() {
           </div>
         </div>
       }
-      {ready ? <Combate gamePin="ABC01" nickname="luisita"/> : null}
+      {ready ? <Welcome gamePin="ABC01" nickname="luisita" /> : null}
     </div >
   );
 }

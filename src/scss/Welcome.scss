@@ -1,0 +1,32 @@
+@import "variables";
+@import "globals";
+@import "navfot";
+
+.Welcome {
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px 0;
+  margin: 0;
+  font-size: 32px;
+}
+
+.welcome-center {
+  flex-direction: column;
+  color: white;
+  margin: auto;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: $semiBold;
+}
+h3 {
+  font-size: 24px;
+  font-weight: $light;
+}
