@@ -84,7 +84,8 @@ function createGame(gamePin, gameSetup) {
         players: [],
         currentRound: 1,
         votesOptionA: [],
-        votesOptionB: []
+        votesOptionB: [],
+        status: "initial"
     };
 }
 
@@ -97,6 +98,21 @@ function getOption(gamePin) {
     var randomOption = game.options.splice(Math.floor(Math.random() * game.options.length), 1);
 
     return randomOption;
+}
+
+function getRoundWinner(gamePin) {
+    var game = getGame(gamePin)
+    var winner = null;
+
+    if (game.votesOptionA.length > game.votesOptionB.length) {
+        winner = JSON.parse(JSON.stringify(game.optionA))
+    } else if (game.votesOptionB.length > game.votesOptionA.length) {
+        winner = JSON.parse(JSON.stringify(game.optionB))
+    } else {
+        console.log("It's a tie, play round again")
+    }
+
+    return winner
 }
 
 export function getGame(gamePin) {
@@ -127,26 +143,6 @@ export function submitVote(gamePin, user, option) {
     }
 }
 
-function getRoundWinner(gamePin) {
-    var game = getGame(gamePin)
-    var winner = null;
-
-    if (game.votesOptionA.length > game.votesOptionB.length) {
-        winner = JSON.parse(JSON.stringify(game.optionA))
-    } else if (game.votesOptionB.length > game.votesOptionA.length) {
-        winner = JSON.parse(JSON.stringify(game.optionB))
-    } else {
-        console.log("It's a tie, play round again")
-    }
-
-    return winner
-}
-
-// submitVote("ABC01", user1, "Waffles")
-// submitVote("ABC01", user2, "Waffles")
-// var round1Winner = getRoundWinner("ABC01")
-// console.log(JSON.stringify(round1Winner, null, 2))
-
 export function finishRound(gamePin) {
     var game = getGame(gamePin)
 
@@ -176,14 +172,28 @@ export function finishRound(gamePin) {
     game.votesOptionB = []
 }
 
+export function startGame(gamePin, user) {
+    if (user.isModerator) {
+        var game = getGame(gamePin)
+        game.status = "open"
+    } else {
+        console.log("Only moderators can open a game")
+    }
+}
+
+export function isGameReady(gamePin) {
+    var game = getGame(gamePin)
+    if (game.status = "open") {
+        return true
+    } else {
+        return false
+    }
+}
+
 // printGameInfo("ABC01")
 // finishRound("ABC01")
 // printGameInfo("ABC01")
 
-
-export function test(gamePin) {
-    return "test " + gamePin
-}
 
 // var user1 = {
 //     nickname: "Luisita",
@@ -213,3 +223,8 @@ var games = {
     ABC02: game2,
     ABC03: game3
 }
+
+// submitVote("ABC01", user1, "Waffles")
+// submitVote("ABC01", user2, "Waffles")
+// var round1Winner = getRoundWinner("ABC01")
+// console.log(JSON.stringify(round1Winner, null, 2))

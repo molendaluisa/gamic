@@ -3,7 +3,7 @@ import { FaUserAlt } from 'react-icons/fa';
 import './scss/Combate.css';
 import Contender from "./Contender";
 import Winner from "./Winner";
-import { test, getGame, submitVote, finishRound } from './backend/GameSetup.js';
+import { getGame, submitVote, finishRound } from './backend/GameSetup.js';
 
 
 export default function Combate(props) {

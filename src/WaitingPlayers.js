@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import './scss/WaitingPlayers.css';
+import { getGame } from "./backend/GameSetup";
 
 export default function WaitingPlayers(props) {
+  const [gamePin, getGamePin] = useState(props.gamePin)
+  const [players, setPlayers] = useState(null)
+
+  function refeeshGamePlayers() {
+    var game = getGame(gamePin)
+    setPlayers(game.players)
+  }
+  setInterval(refeeshGamePlayers, 10000);
+ 
   return (
     <div className="WaitingPlayers d-flex-center">
 
