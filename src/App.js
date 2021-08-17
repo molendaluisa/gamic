@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import './scss/App.css';
 import Welcome from './Welcome';
 import WaitingPlayers from './WaitingPlayers';
-import {getGame} from './backend/GameSetup.js';
+import { getGame } from './backend/GameSetup.js';
 
 
 export default function App() {
   const [ready, setReady] = useState(false);
   const [pinGame, setPinGame] = useState(null);
   const [nickname, setNickname] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(false);
 
   function checkEnter(event) {
     event.preventDefault();
     var game = getGame(pinGame)
 
     if (game == null) {
-      //TODO(luisita): Handle Game Not found
+      setErrorMsg(true)
       console.log("Game not found")
     } else {
       setReady(true);
@@ -40,6 +41,7 @@ export default function App() {
             <input type="text" placeholder="Nickname" className="input" onChange={handleNicknameChange} />
             <button className="btn btn-primary" onClick={checkEnter}>Enter</button>
           </div>
+          {errorMsg ? <div><p className="error-msg-wrapper">Game not found</p></div> : null}
         </div>
       }
       {ready ?

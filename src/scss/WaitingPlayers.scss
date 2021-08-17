@@ -12,14 +12,40 @@
 .bar {
   display: flex;
   align-items: center;
+}
+
+nav {
   justify-content: center;
+}
+
+.down {
+  justify-content: space-between;
+}
+
+.wbutton li {
+  width: auto;
 }
 
 .waiting-center {
   color: white;
 }
 
+.join-banner {
+  font-family: $open;
+  font-weight: $light;
+  padding: 0 20px;
+}
+
+.link {
+  font-family: $chelsea;
+  font-size: 32px;
+}
+
 p {
   font-weight: $light;
   font-size: 32px;
+}
+
+.btn-start {
+  width: 150px;
 }
