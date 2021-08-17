@@ -1,4 +1,3 @@
-// console.log("hello")
 const defaultOptionA = {
     description: "Pancakes",
     imageUrl: "https://images.pexels.com/photos/718739/pexels-photo-718739.jpeg?auto=compress&cs=tinysrgb&https://images.unsplash.com/photo-1528207776546-365bb710ee93?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=462&h=308"
@@ -70,7 +69,6 @@ const gameSetup = {
             imageUrl: "https://images.pexels.com/photos/705075/pexels-photo-705075.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
         },
     ],
-    totalRounds: 15
 }
 
 function createGame(gamePin, gameSetup) {
@@ -79,7 +77,7 @@ function createGame(gamePin, gameSetup) {
         optionA: JSON.parse(JSON.stringify(gameSetup.defaultOptionA)),
         optionB: JSON.parse(JSON.stringify(gameSetup.defaultOptionB)),
         options: JSON.parse(JSON.stringify(gameSetup.options)),
-        totalRounds: gameSetup.totalRounds,
+        totalRounds: gameSetup.options.length + 1,
         moderator: null,
         roundWinner: null,
         winner: null,
@@ -90,23 +88,8 @@ function createGame(gamePin, gameSetup) {
     };
 }
 
-var game1 = createGame("ABC01", gameSetup)
-var game2 = createGame("ABC02", gameSetup)
-var game3 = createGame("ABC03", gameSetup)
-
-var games = {
-    ABC01: game1,
-    ABC02: game2,
-    ABC03: game3
-}
-
 function printGameInfo(gamePin) {
     console.log(JSON.stringify(getGame(gamePin), null, 2))
-}
-
-
-export function getGame(gamePin) {
-    return games[gamePin]
 }
 
 function getOption(gamePin) {
@@ -116,33 +99,20 @@ function getOption(gamePin) {
     return randomOption;
 }
 
-// printGameInfo("ABC01")
-// getOption("ABC01")
-// getOption("ABC01")
-// getOption("ABC01")
+export function getGame(gamePin) {
+    return games[gamePin]
+}
 
 
-function joinGame(gamePin, user) {
+export function joinGame(gamePin, user) {
     var game = getGame(gamePin)
-    game.players.push(user)
-}
-var user1 = {
-    nickname: "Luisita",
-    isModerator: false
-}
-var user2 = {
-    nickname: "Ale",
-    isModerator: false
-}
-var user3 = {
-    nickname: "Toti",
-    isModerator: true
+    if (user.isModerator) {
+        game.moderator = user;
+    } else {
+        game.players.push(user)
+    }
 }
 
-// printGameInfo("ABC01")
-joinGame("ABC01", user1)
-joinGame("ABC01", user2)
-// printGameInfo("ABC01")
 
 export function submitVote(gamePin, user, option) {
     console.log("Submiting vote")
@@ -213,4 +183,33 @@ export function finishRound(gamePin) {
 
 export function test(gamePin) {
     return "test " + gamePin
+}
+
+// var user1 = {
+//     nickname: "Luisita",
+//     isModerator: false
+// }
+// var user2 = {
+//     nickname: "Ale",
+//     isModerator: false
+// }
+// var user3 = {
+//     nickname: "Toti",
+//     isModerator: true
+// }
+
+// printGameInfo("ABC01")
+// joinGame("ABC01", user1)
+// joinGame("ABC01", user2)
+// printGameInfo("ABC01")
+
+
+var game1 = createGame("ABC01", gameSetup)
+var game2 = createGame("ABC02", gameSetup)
+var game3 = createGame("ABC03", gameSetup)
+
+var games = {
+    ABC01: game1,
+    ABC02: game2,
+    ABC03: game3
 }

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import './scss/App.css';
 import Welcome from './Welcome';
 import WaitingPlayers from './WaitingPlayers';
+import {getGame} from './backend/GameSetup.js';
+
 
 export default function App() {
   const [ready, setReady] = useState(false);
@@ -10,7 +12,14 @@ export default function App() {
 
   function checkEnter(event) {
     event.preventDefault();
-    setReady(true);
+    var game = getGame(pinGame)
+
+    if (game == null) {
+      //TODO(luisita): Handle Game Not found
+      console.log("Game not found")
+    } else {
+      setReady(true);
+    }
   };
 
   function handlePinChange(event) {
@@ -35,7 +44,7 @@ export default function App() {
       }
       {ready ?
         /*   <Welcome gamePin="ABC01" nickname="luisita" />    */
-        <WaitingPlayers gamePin="ABC01" nickname="luisita" /> : null}
+        <WaitingPlayers gamePin={pinGame} nickname={nickname} /> : null}
     </div >
   );
 }
