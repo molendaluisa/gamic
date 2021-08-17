@@ -20,25 +20,57 @@ const gameSetup = {
         {
             description: "Nutella",
             imageUrl: "https://images.pexels.com/photos/2776935/pexels-photo-2776935.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=308&w=462&fit=crop"
-        }
-        // {
-        //     description: "Mosquitos",
-        //     imageUrl: "https://images.pexels.com/photos/86722/tiger-mosquito-mosquito-asian-tigermucke-sting-86722.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=308&w=462&fit=crop"
-        // },
-        // {
-        //     description: "Treadmill",
-        //     imageUrl: "https://images.pexels.com/photos/3757957/pexels-photo-3757957.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
-        // },
-        // {
-        //     description: "Festivals",
-        //     imageUrl: "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
-        // },
-        // {
-        //     description: "Books",
-        //     imageUrl: "https://images.pexels.com/photos/3494806/pexels-photo-3494806.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
-        // },
+        },
+        {
+            description: "Mosquitos",
+            imageUrl: "https://images.pexels.com/photos/86722/tiger-mosquito-mosquito-asian-tigermucke-sting-86722.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=308&w=462&fit=crop"
+        },
+        {
+            description: "Treadmill",
+            imageUrl: "https://images.pexels.com/photos/3757957/pexels-photo-3757957.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+        },
+        {
+            description: "Festivals",
+            imageUrl: "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+        },
+        {
+            description: "Books",
+            imageUrl: "https://images.pexels.com/photos/3494806/pexels-photo-3494806.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+        },
+        {
+            description: "Beaches",
+            imageUrl: "https://images.pexels.com/photos/7017468/pexels-photo-7017468.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+        },
+        {
+            description: "Excel",
+            imageUrl: "https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+        },
+        {
+            description: "Love",
+            imageUrl: "https://images.pexels.com/photos/6788862/pexels-photo-6788862.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+        },
+        {
+            description: "Vacation",
+            imageUrl: "https://images.pexels.com/photos/386009/pexels-photo-386009.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+        },
+        {
+            description: "Elvis",
+            imageUrl: "https://images.pexels.com/photos/270968/pexels-photo-270968.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+        },
+        {
+            description: "Meetings",
+            imageUrl: "https://images.pexels.com/photos/7648040/pexels-photo-7648040.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+        },
+        {
+            description: "Video Games",
+            imageUrl: "https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+        },
+        {
+            description: "Mountains",
+            imageUrl: "https://images.pexels.com/photos/705075/pexels-photo-705075.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+        },
     ],
-    totalRounds: 7
+    totalRounds: 15
 }
 
 function createGame(gamePin, gameSetup) {
@@ -148,7 +180,7 @@ function getRoundWinner(gamePin) {
 export function finishRound(gamePin) {
     var game = getGame(gamePin)
 
-    if (game.options.length == 0) {
+    if (game.options.length === 0) {
         console.log("Game over")
     }
     // Set new optionB

@@ -73,7 +73,7 @@ export default function Combate(props) {
 
       {/* NAV */}
       <nav className="bar">
-        <h1>{gameOver ? "Winner" : `Round #${game.currentRound} - What would you save?`} </h1>
+        <h1>{gameOver ? "Winner!!!" : `Round #${game.currentRound} - What would you save?`} </h1>
       </nav>
 
 
@@ -85,9 +85,9 @@ export default function Combate(props) {
           </div>
           :
           <div className="battle-wrapper d-flex-center">
-            <Contender optionInfo={game.optionA} handleSelection={handleSelectionLeft} status={overlayLeft} noEvents={noEvents}/>
+            <Contender optionInfo={game.optionA} handleSelection={handleSelectionLeft} status={overlayLeft} noEvents={noEvents} />
             <div className="versus"> VS </div>
-            <Contender optionInfo={game.optionB} handleSelection={handleSelectionRight} status={overlayRight} noEvents={noEvents}/>
+            <Contender optionInfo={game.optionB} handleSelection={handleSelectionRight} status={overlayRight} noEvents={noEvents} />
           </div>
         }
       </div>
@@ -96,12 +96,16 @@ export default function Combate(props) {
       <footer className="bar">
         <ul>
           <li>{game.currentRound}/{game.totalRounds}</li>
-          <li className="counter"><div id="countdown">
-            <div id="countdown-number">{counter}</div>
-            <svg>
-              <circle r="18" cx="20" cy="20"></circle>
-            </svg>
-          </div></li>
+          {gameOver ? null :
+            <li className="counter">
+              <div id="countdown">
+                <div id="countdown-number">{counter}</div>
+                <svg>
+                  <circle r="18" cx="20" cy="20"></circle>
+                </svg>
+              </div>
+            </li>
+          }
           <li>Gamic - PIN: {props.gamePin}</li>
         </ul>
       </footer>
