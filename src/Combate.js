@@ -95,7 +95,7 @@ export default function Combate(props) {
 
       {/* FOOTER */}
       <footer className="bar">
-        <ul>
+        <ul className="fot-items">
           <li>{game.currentRound}/{game.totalRounds}</li>
           {gameOver ? null :
             <li className="counter">

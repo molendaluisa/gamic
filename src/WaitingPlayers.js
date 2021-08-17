@@ -3,16 +3,38 @@ import { FaUserAlt } from 'react-icons/fa';
 import './scss/WaitingPlayers.css';
 import { getGame } from "./backend/GameSetup";
 
+
 export default function WaitingPlayers(props) {
   const [gamePin, setGamePin] = useState(props.gamePin)
   const [players, setPlayers] = useState(null)
 
   function refreshGamePlayers() {
     var game = getGame(gamePin)
+    game.players = [
+      {
+        nickname: "Luisita",
+        isModerator: false
+      },
+      {
+        nickname: "Ale",
+        isModerator: false
+      },
+      {
+        nickname: "Toti",
+        isModerator: true
+      }
+    ]
     setPlayers(game.players)
   }
-  setInterval(refreshGamePlayers, 10000);
- 
+  setInterval(refreshGamePlayers, 5000);
+
+  var playersItems = null
+  if (players) {
+    playersItems = players.map((player) =>
+      <li>{player.nickname}</li>
+    );
+  }
+
   return (
     <div className="WaitingPlayers d-flex-center">
 
@@ -24,9 +46,13 @@ export default function WaitingPlayers(props) {
 
 
       {/* MIDDLE SECTION */}
-      <div className="waiting-center d-flex-center">
-        <p>Waiting for players...</p>
-      </div>
+
+      {players ?
+        <ul className="players-list">{playersItems}</ul> :
+        <div className="waiting-center d-flex-center">
+          <p>Waiting for players...</p>
+        </div>}
+
 
 
 

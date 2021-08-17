@@ -248,7 +248,7 @@ h1 {
   margin: 0 80px;
 }
 
-ul {
+.fot-items {
   list-style-type: none;
   padding: 20px 0;
   margin: 0;
@@ -263,13 +263,13 @@ ul {
           align-items: center;
 }
 
-li {
+.fot-items li {
   padding: 0 30px;
   font-size: 24px;
   width: 600px;
 }
 
-li:last-child {
+.fot-items li:last-child {
   text-align: end;
 }
 

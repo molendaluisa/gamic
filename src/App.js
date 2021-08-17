@@ -15,9 +15,8 @@ export default function App() {
     event.preventDefault();
     var game = getGame(pinGame)
 
-    if (game == null) {
+    if (game == null || nickname == null) {
       setErrorMsg(true)
-      console.log("Game not found")
     } else {
       setReady(true);
     }
@@ -41,11 +40,10 @@ export default function App() {
             <input type="text" placeholder="Nickname" className="input" onChange={handleNicknameChange} />
             <button className="btn btn-primary" onClick={checkEnter}>Enter</button>
           </div>
-          {errorMsg ? <div><p className="error-msg-wrapper">Game not found</p></div> : null}
+          {errorMsg ? <div><p className="error-msg-wrapper">Game not found OR Nickname invalid</p></div> : null}
         </div>
       }
       {ready ?
-        /*   <Welcome gamePin="ABC01" nickname="luisita" />    */
         <WaitingPlayers gamePin={pinGame} nickname={nickname} /> : null}
     </div >
   );
