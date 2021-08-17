@@ -24,7 +24,6 @@ body {
   font-size: 64px;
   color: white;
   text-align: center;
-  margin: 32px;
 }
 
 .d-flex-center {
@@ -192,6 +191,10 @@ body {
           flex-direction: column;
 }
 
+h1 {
+  margin: 32px;
+}
+
 .form-container {
   background-color: white;
   width: 288px;
@@ -211,14 +214,14 @@ button {
   width: 100%;
 }
 
+.error-msg-wrapper {
+  color: white;
+  font-size: 26px;
+}
+
 @media (max-device-width: 812px) and (orientation: landscape) {
-  .app-container {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
+  h1 {
+    margin: 20px;
   }
 }
 /*# sourceMappingURL=App.css.map */
