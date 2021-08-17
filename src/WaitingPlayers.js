@@ -4,14 +4,14 @@ import './scss/WaitingPlayers.css';
 import { getGame } from "./backend/GameSetup";
 
 export default function WaitingPlayers(props) {
-  const [gamePin, getGamePin] = useState(props.gamePin)
+  const [gamePin, setGamePin] = useState(props.gamePin)
   const [players, setPlayers] = useState(null)
 
-  function refeeshGamePlayers() {
+  function refreshGamePlayers() {
     var game = getGame(gamePin)
     setPlayers(game.players)
   }
-  setInterval(refeeshGamePlayers, 10000);
+  setInterval(refreshGamePlayers, 10000);
  
   return (
     <div className="WaitingPlayers d-flex-center">
