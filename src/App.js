@@ -35,11 +35,11 @@ export default function App() {
       {ready ? null :
         <div className="d-flex-center app-container">
           <h1 className="logo-white">Gamic</h1>
-          <div className="form-container d-flex-center">
+          <form className="form-container d-flex-center" onSubmit={checkEnter}>
             <input type="text" placeholder="Game PIN" className="input" onChange={handlePinChange} />
             <input type="text" placeholder="Nickname" className="input" onChange={handleNicknameChange} />
             <button className="btn btn-primary" onClick={checkEnter}>Enter</button>
-          </div>
+          </form>
           {errorMsg ? <div><p className="error-msg-wrapper">Game not found OR Nickname invalid</p></div> : null}
         </div>
       }

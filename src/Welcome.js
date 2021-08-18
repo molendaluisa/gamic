@@ -22,9 +22,9 @@ export default function Welcome(props) {
 
       {/* FOOTER */}
       <footer className="bar">
-        <ul>
-          <li></li>
-          <li>PIN: {props.gamePin}</li>
+        <ul className="fot-ul">
+          <li className="fot-li"></li>
+          <li className="fot-li">PIN: {props.gamePin}</li>
         </ul>
       </footer>
     </div>

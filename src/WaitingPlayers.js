@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { FaUserAlt } from 'react-icons/fa';
 import './scss/WaitingPlayers.css';
-import { getGame } from "./backend/GameSetup";
+import { getGame, startGame } from "./backend/GameSetup";
 
 
 export default function WaitingPlayers(props) {
   const [gamePin, setGamePin] = useState(props.gamePin)
   const [players, setPlayers] = useState(null)
+  const [gameStatus, setGameStatus] = useState(null)
+
+  function handleStart(event) {
+    event.preventDefault()
+    startGame(gamePin, { nickname: props.nickname, isModerator: true })
+    setGameStatus(getGame(props.gamePin))
+  }
 
   function refreshGamePlayers() {
     var game = getGame(gamePin)
@@ -58,9 +65,9 @@ export default function WaitingPlayers(props) {
 
       {/* FOOTER */}
       <footer className="bar wbutton">
-        <ul className="bar down">
-          <li>0 <FaUserAlt /></li>
-          <li><button className="btn btn-primary btn-start">Start</button></li>
+        <ul className="bar down fot-ul">
+          <li className="fot-li">0 <FaUserAlt /></li>
+          <li className="fot-li"><button className="btn btn-primary btn-start" onClick={handleStart}>Start</button></li>
         </ul>
       </footer>
     </div>
