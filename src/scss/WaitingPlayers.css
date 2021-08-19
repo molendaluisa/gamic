@@ -109,7 +109,6 @@ body {
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   max-width: 500px;
-  position: relative;
 }
 
 .polaroid > img {
@@ -213,6 +212,18 @@ body {
 
 .fot-li:last-child {
   text-align: end;
+}
+
+@media (max-device-width: 812px) {
+  .fot-li {
+    font-size: 16px;
+  }
+}
+
+@media (max-device-width: 812px) and (orientation: landscape) {
+  .fot-li {
+    font-size: 20px;
+  }
 }
 
 .WaitingPlayers {
