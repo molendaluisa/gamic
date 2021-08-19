@@ -68,7 +68,6 @@ export default function WaitingPlayers(props) {
 
 
 
-
         {/* FOOTER */}
         <footer className="bar wbutton">
           <ul className="bar down fot-ul">

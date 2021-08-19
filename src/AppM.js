@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import './scss/App.css';
-import Welcome from './Welcome';
 import WaitingPlayers from './WaitingPlayers';
 import { getGame } from './backend/GameSetup.js';
 
 
-export default function App() {
+export default function AppM() {
   const [ready, setReady] = useState(false);
   const [pinGame, setPinGame] = useState(null);
   const [nickname, setNickname] = useState(null);
@@ -40,7 +39,7 @@ export default function App() {
             <input type="text" placeholder="Nickname" className="input" onChange={handleNicknameChange} />
             <button className="btn btn-primary" onClick={checkEnter}>Enter</button>
           </form>
-          {errorMsg ? <div><p className="error-msg-wrapper">Game not found OR Nickname invalid</p></div> : null}
+          {errorMsg ? <div><p className="error-msg-wrapper">Game not found OR Nickname invalid Moderator</p></div> : null}
         </div>
       }
       {ready ?

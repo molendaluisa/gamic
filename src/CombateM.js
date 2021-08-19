@@ -3,22 +3,40 @@ import { FaUserAlt } from 'react-icons/fa';
 import './scss/Combate.css';
 import Contender from "./Contender";
 import Winner from "./Winner";
-import { getGame, submitVote, finishRound } from './backend/GameSetup.js';
+import { getGame, submitVote, finishRound, getRoundWinner } from './backend/GameSetup.js';
 
 
-export default function Combate(props) {
-  let timer = 500;
-  const [counter, setCounter] = useState(10)
+export default function CombateM(props) {
+  let defaultTimer = 5;
+  const [counter, setCounter] = useState(defaultTimer)
   const [overlayLeft, setOverlayLeft] = useState(null)
   const [overlayRight, setOverlayRight] = useState(null)
   const [noEvents, setNoEvents] = useState(null)
   const [game, setGame] = useState(getGame(props.gamePin))
   const [gameOver, setGameOver] = useState(false)
-
+  const [optionAWon, setOptionAWon] = useState(null)
+  const [optionBWon, setOptionBWon] = useState(null)
+  const [roundResult, setRoundResult] = useState(false)
 
   React.useEffect(() => {
     if (counter === 0) {
-      goToNextRound()
+      setRoundResult(true)
+      setOverlayLeft(null)
+      setOverlayRight(null)
+      var roundWinner = getRoundWinner(props.gamePin)
+
+      if (game.optionA.description === roundWinner.description) {
+        console.log('optionA is the winner')
+        setOptionAWon(true)
+        setOptionBWon(false)
+      } else if (game.optionB.description === roundWinner.description) {
+        console.log("option b is the winner")
+        setOptionAWon(false)
+        setOptionBWon(true)
+      } else {
+        setOptionAWon(true)
+        console.log(roundWinner)
+      }
     }
     const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
     return () => clearInterval(timer);
@@ -61,12 +79,20 @@ export default function Combate(props) {
       setGameOver(true)
     } else {
       setGame(getGame(game.pin))
-      setCounter(10)
+      setCounter(defaultTimer)
     }
     setOverlayLeft(null)
     setOverlayRight(null)
+    setOptionAWon(null)
+    setOptionBWon(null)
     setNoEvents(null)
-    setCounter(timer)
+    setRoundResult(false)
+    setCounter(defaultTimer)
+  }
+
+  function handleNext(event) {
+    event.preventDefault();
+    goToNextRound();
   }
 
   return (
@@ -75,7 +101,7 @@ export default function Combate(props) {
       {/* NAV */}
       <nav className="bar">
         <h1>{gameOver ? "Winner!!!" : `Round #${game.currentRound} - What would you save?`} </h1>
-        <button className="btn btn-primary btn-start btn-next">Next</button>
+        <button className="btn btn-primary btn-start btn-next" onClick={handleNext}>Next</button>
       </nav>
 
 
@@ -87,9 +113,9 @@ export default function Combate(props) {
           </div>
           :
           <div className="battle-wrapper d-flex-center">
-            <Contender optionInfo={game.optionA} handleSelection={handleSelectionLeft} status={overlayLeft} noEvents={noEvents} />
+            <Contender optionInfo={game.optionA} handleSelection={handleSelectionLeft} status={overlayLeft} noEvents={noEvents} winner={optionAWon} />
             <div className="versus"> VS </div>
-            <Contender optionInfo={game.optionB} handleSelection={handleSelectionRight} status={overlayRight} noEvents={noEvents} />
+            <Contender optionInfo={game.optionB} handleSelection={handleSelectionRight} status={overlayRight} noEvents={noEvents} winner={optionBWon} />
           </div>
         }
       </div>
@@ -98,7 +124,7 @@ export default function Combate(props) {
       <footer className="bar">
         <ul className="fot-ul">
           <li className="fot-li">{game.currentRound}/{game.totalRounds}</li>
-          {gameOver ? null :
+          {roundResult ? null :
             <li className="counter fot-li">
               <div id="countdown">
                 <div id="countdown-number">{counter}</div>

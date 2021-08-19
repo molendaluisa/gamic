@@ -100,7 +100,7 @@ function getOption(gamePin) {
     return randomOption;
 }
 
-function getRoundWinner(gamePin) {
+export function getRoundWinner(gamePin) {
     var game = getGame(gamePin)
     var winner = null;
 
