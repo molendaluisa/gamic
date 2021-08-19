@@ -193,12 +193,13 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 100vw;
 }
 
 .fot-li {
   padding: 0 30px;
   font-size: 24px;
-  width: 600px;
+  width: 550px;
 }
 
 .fot-li:last-child {

@@ -11,12 +11,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100vw;
 }
 
 .fot-li {
   padding: 0 30px;
   font-size: 24px;
-  width: 600px;
+  width: 550px;
 }
 
 .fot-li:last-child {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './scss/App.css';
-import Welcome from './Welcome';
+import Combate from './Combate';
 import WaitingPlayers from './WaitingPlayers';
 import { getGame } from './backend/GameSetup.js';
 

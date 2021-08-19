@@ -89,6 +89,10 @@ svg circle {
   animation: countdown 30s linear infinite forwards;
 }
 
+.btn-next {
+  position: absolute;
+  right: 20px;
+}
 @keyframes countdown {
   from {
     stroke-dashoffset: 0px;
