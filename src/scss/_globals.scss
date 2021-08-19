@@ -102,6 +102,13 @@ body {
   padding: 10px 0;
 }
 
+.round-winner {
+  background-color: $persianGreen !important;
+}
+.round-loser {
+  background-color: $bruntSienna !important;
+}
+
 @media (max-device-width: 812px) {
   .logo-white {
     font-size: 52px;
