@@ -95,10 +95,10 @@ export default function Combate(props) {
 
       {/* FOOTER */}
       <footer className="bar">
-        <ul>
-          <li>{game.currentRound}/{game.totalRounds}</li>
+        <ul className="fot-ul">
+          <li className="fot-li">{game.currentRound}/{game.totalRounds}</li>
           {gameOver ? null :
-            <li className="counter">
+            <li className="counter fot-li">
               <div id="countdown">
                 <div id="countdown-number">{counter}</div>
                 <svg className="circle-counter">
@@ -107,7 +107,7 @@ export default function Combate(props) {
               </div>
             </li>
           }
-          <li>1 <FaUserAlt /> - PIN: {props.gamePin}</li>
+          <li className="fot-li">1 <FaUserAlt /> - PIN: {props.gamePin}</li>
         </ul>
       </footer>
 

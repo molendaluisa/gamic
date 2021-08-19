@@ -15,9 +15,8 @@ export default function App() {
     event.preventDefault();
     var game = getGame(pinGame)
 
-    if (game == null) {
+    if (game == null || nickname == null) {
       setErrorMsg(true)
-      console.log("Game not found")
     } else {
       setReady(true);
     }
@@ -32,22 +31,21 @@ export default function App() {
   };
 
   return (
-        <div className="App">
-          {ready ? null :
-            <div className="d-flex-center app-container">
-              <h1 className="logo-white">Gamic</h1>
-              <div className="form-container d-flex-center">
-                <input type="text" placeholder="Game PIN" className="input" onChange={handlePinChange} />
-                <input type="text" placeholder="Nickname" className="input" onChange={handleNicknameChange} />
-                <button className="btn btn-primary" onClick={checkEnter}>Enter</button>
-              </div>
-              {errorMsg ? <div><p className="error-msg-wrapper">Game not found</p></div> : null}
-            </div>
-          }
-          {ready ?
-            /*   <Welcome gamePin="ABC01" nickname="luisita" />    */
-            <WaitingPlayers gamePin={pinGame} nickname={nickname} /> : null}
-        </div >
+    <div className="App">
+      {ready ? null :
+        <div className="d-flex-center app-container">
+          <h1 className="logo-white">Gamic</h1>
+          <form className="form-container d-flex-center" onSubmit={checkEnter}>
+            <input type="text" placeholder="Game PIN" className="input" onChange={handlePinChange} />
+            <input type="text" placeholder="Nickname" className="input" onChange={handleNicknameChange} />
+            <button className="btn btn-primary" onClick={checkEnter}>Enter</button>
+          </form>
+          {errorMsg ? <div><p className="error-msg-wrapper">Game not found OR Nickname invalid</p></div> : null}
+        </div>
+      }
+      {ready ?
+        <WaitingPlayers gamePin={pinGame} nickname={nickname} /> : null}
+    </div >
   );
 }
 
