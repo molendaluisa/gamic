@@ -7,7 +7,7 @@ import { getGame, submitVote, finishRound, getRoundWinner } from './backend/Game
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 export default function CombateM(props) {
-  let defaultTimer = 10;
+  let defaultTimer = 30;
   const [overlayLeft, setOverlayLeft] = useState(null)
   const [overlayRight, setOverlayRight] = useState(null)
   const [noEvents, setNoEvents] = useState(null)
@@ -20,36 +20,34 @@ export default function CombateM(props) {
 
   const renderTime = ({ remainingTime }) => {
     if (remainingTime === 0) {
-      return <div className="timer">Too lale...</div>;
+      return null;
     }
-  
+
     return (
       <div className="timer">
-        <div className="text">Remaining</div>
         <div className="value">{remainingTime}</div>
-        <div className="text">seconds</div>
       </div>
     );
   };
 
   function onTimeEnds() {
-      setRoundResult(true)
-      setOverlayLeft(null)
-      setOverlayRight(null)
-      var roundWinner = getRoundWinner(props.gamePin)
+    setRoundResult(true)
+    setOverlayLeft(null)
+    setOverlayRight(null)
+    var roundWinner = getRoundWinner(props.gamePin)
 
-      if (game.optionA.description === roundWinner.description) {
-        setOptionAWon(true)
-        setOptionBWon(false)
-      } else if (game.optionB.description === roundWinner.description) {
-        setOptionAWon(false)
-        setOptionBWon(true)
-      } else {
-        setOptionAWon(true)
-        console.log("its a tie!")
-        console.log(roundWinner)
-      }
-    
+    if (game.optionA.description === roundWinner.description) {
+      setOptionAWon(true)
+      setOptionBWon(false)
+    } else if (game.optionB.description === roundWinner.description) {
+      setOptionAWon(false)
+      setOptionBWon(true)
+    } else {
+      setOptionAWon(true)
+      console.log("its a tie!")
+      console.log(roundWinner)
+    }
+
   }
 
   function handleSelectionLeft() {
@@ -138,22 +136,14 @@ export default function CombateM(props) {
               key={key}
               isPlaying
               duration={defaultTimer}
-              colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+              colors={[["#000000"]]}
               onComplete={onTimeEnds}
+              size={60}
+              strokeWidth={5}
             >
               {renderTime}
             </CountdownCircleTimer>
           </div>
-          {/* {roundResult ? null :
-            <li className="counter fot-li">
-              <div id="countdown">
-                <div id="countdown-number">{counter}</div>
-                <svg className="circle-counter">
-                  <circle r="18" cx="20" cy="20"></circle>
-                </svg>
-              </div>
-            </li>
-          } */}
           <li className="fot-li">1 <FaUserAlt /> - PIN: {props.gamePin}</li>
         </ul>
       </footer>
