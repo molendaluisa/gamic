@@ -4,7 +4,6 @@ import './scss/Combate.css';
 import Contender from "./Contender";
 import Winner from "./Winner";
 import { getGame, submitVote, finishRound, getRoundWinner } from './backend/GameSetup.js';
-// import Timer from "./Timer";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 export default function CombateM(props) {

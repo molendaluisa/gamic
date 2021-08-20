@@ -2,7 +2,6 @@ import React, { useState,useEffect } from "react";
 import './scss/App.css';
 import WaitingPlayers from './WaitingPlayers';
 import { getGame } from './backend/GameSetup.js';
-// import Timer from "./Timer";
 
 
 export default function AppM(props) {
