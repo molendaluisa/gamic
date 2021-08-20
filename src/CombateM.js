@@ -4,11 +4,11 @@ import './scss/Combate.css';
 import Contender from "./Contender";
 import Winner from "./Winner";
 import { getGame, submitVote, finishRound, getRoundWinner } from './backend/GameSetup.js';
-
+// import Timer from "./Timer";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 export default function CombateM(props) {
-  let defaultTimer = 5;
-  const [counter, setCounter] = useState(defaultTimer)
+  let defaultTimer = 10;
   const [overlayLeft, setOverlayLeft] = useState(null)
   const [overlayRight, setOverlayRight] = useState(null)
   const [noEvents, setNoEvents] = useState(null)
@@ -17,35 +17,46 @@ export default function CombateM(props) {
   const [optionAWon, setOptionAWon] = useState(null)
   const [optionBWon, setOptionBWon] = useState(null)
   const [roundResult, setRoundResult] = useState(false)
+  const [key, setKey] = useState(0)
 
-  React.useEffect(() => {
-    if (counter === 0) {
+  const renderTime = ({ remainingTime }) => {
+    if (remainingTime === 0) {
+      return <div className="timer">Too lale...</div>;
+    }
+  
+    return (
+      <div className="timer">
+        <div className="text">Remaining</div>
+        <div className="value">{remainingTime}</div>
+        <div className="text">seconds</div>
+      </div>
+    );
+  };
+
+  function onTimeEnds() {
       setRoundResult(true)
       setOverlayLeft(null)
       setOverlayRight(null)
       var roundWinner = getRoundWinner(props.gamePin)
 
       if (game.optionA.description === roundWinner.description) {
-        console.log('optionA is the winner')
         setOptionAWon(true)
         setOptionBWon(false)
       } else if (game.optionB.description === roundWinner.description) {
-        console.log("option b is the winner")
         setOptionAWon(false)
         setOptionBWon(true)
       } else {
         setOptionAWon(true)
+        console.log("its a tie!")
         console.log(roundWinner)
       }
-    }
-    const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-    return () => clearInterval(timer);
-  }, [counter]);
+    
+  }
 
   function handleSelectionLeft() {
-    // Once a selection is done is should not be possible to select another one
     var user = {
       nickname: props.nickname,
+      isModerator: true
     }
 
     if (overlayLeft == null) {
@@ -58,9 +69,9 @@ export default function CombateM(props) {
   }
 
   function handleSelectionRight() {
-    // Once a selection is done is should not be possible to select another one
     var user = {
       nickname: props.nickname,
+      isModerator: true
     }
 
     if (overlayRight == null) {
@@ -79,7 +90,7 @@ export default function CombateM(props) {
       setGameOver(true)
     } else {
       setGame(getGame(game.pin))
-      setCounter(defaultTimer)
+      setKey(prevKey => prevKey + 1)
     }
     setOverlayLeft(null)
     setOverlayRight(null)
@@ -87,7 +98,6 @@ export default function CombateM(props) {
     setOptionBWon(null)
     setNoEvents(null)
     setRoundResult(false)
-    setCounter(defaultTimer)
   }
 
   function handleNext(event) {
@@ -124,7 +134,18 @@ export default function CombateM(props) {
       <footer className="bar">
         <ul className="fot-ul">
           <li className="fot-li">{game.currentRound}/{game.totalRounds}</li>
-          {roundResult ? null :
+          <div className="timer-wrapper">
+            <CountdownCircleTimer
+              key={key}
+              isPlaying
+              duration={defaultTimer}
+              colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+              onComplete={onTimeEnds}
+            >
+              {renderTime}
+            </CountdownCircleTimer>
+          </div>
+          {/* {roundResult ? null :
             <li className="counter fot-li">
               <div id="countdown">
                 <div id="countdown-number">{counter}</div>
@@ -133,11 +154,10 @@ export default function CombateM(props) {
                 </svg>
               </div>
             </li>
-          }
+          } */}
           <li className="fot-li">1 <FaUserAlt /> - PIN: {props.gamePin}</li>
         </ul>
       </footer>
-
     </div >
   );
 }

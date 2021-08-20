@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import './scss/App.css';
 import WaitingPlayers from './WaitingPlayers';
 import { getGame } from './backend/GameSetup.js';
+// import Timer from "./Timer";
 
 
-export default function AppM() {
+export default function AppM(props) {
   const [ready, setReady] = useState(false);
   const [pinGame, setPinGame] = useState(null);
   const [nickname, setNickname] = useState(null);
@@ -41,9 +42,9 @@ export default function AppM() {
           </form>
           {errorMsg ? <div><p className="error-msg-wrapper">Game not found OR Nickname invalid Moderator</p></div> : null}
         </div>
-      }
+      }   
       {ready ?
-        <WaitingPlayers gamePin={pinGame} nickname={nickname} /> : null}
+        <WaitingPlayers gamePin={pinGame} nickname={nickname}/> : null}
     </div >
   );
 }
