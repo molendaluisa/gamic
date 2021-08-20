@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import './scss/App.css';
 import Welcome from './Welcome';
-import WaitingPlayers from './WaitingPlayers';
 import { getGame } from './backend/GameSetup.js';
 
 
@@ -44,7 +43,7 @@ export default function App() {
         </div>
       }
       {ready ?
-        <WaitingPlayers gamePin={pinGame} nickname={nickname} /> : null}
+        <Welcome gamePin={pinGame} nickname={nickname} /> : null}
     </div >
   );
 }
