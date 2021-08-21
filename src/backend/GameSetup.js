@@ -1,3 +1,4 @@
+const api = true
 const defaultOptionA = {
     description: "Pancakes",
     imageUrl: "https://images.pexels.com/photos/718739/pexels-photo-718739.jpeg?auto=compress&cs=tinysrgb&https://images.unsplash.com/photo-1528207776546-365bb710ee93?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=462&h=308"
@@ -89,10 +90,6 @@ function createGame(gamePin, gameSetup) {
     };
 }
 
-function printGameInfo(gamePin) {
-    console.log(JSON.stringify(getGame(gamePin), null, 2))
-}
-
 function getOption(gamePin) {
     var game = getGame(gamePin)
     var randomOption = game.options.splice(Math.floor(Math.random() * game.options.length), 1);
@@ -100,22 +97,37 @@ function getOption(gamePin) {
     return randomOption;
 }
 
-export function getRoundWinner(gamePin) {
-    var game = getGame(gamePin)
-    var winner = null;
-
-    if (game.votesOptionA.length > game.votesOptionB.length) {
-        winner = JSON.parse(JSON.stringify(game.optionA))
-    } else if (game.votesOptionB.length > game.votesOptionA.length) {
-        winner = JSON.parse(JSON.stringify(game.optionB))
-    } else {
-        console.log("It's a tie, play round again")
-    }
-
-    return winner
+export function getRoundWinner(gamePin, callbackFunction) {
+    // if (api) {
+    //     // Get round winner from the server
+    //     fetch('http://localhost:5000/game/' +  gamePin + "/finishRound")
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log(data)
+    //         callbackFunction(data.roundWinner);
+    //     })
+    // } else {
+        var game = getGame(gamePin)
+        var winner = null;
+    
+        if (game.votesOptionA.length > game.votesOptionB.length) {
+            winner = JSON.parse(JSON.stringify(game.optionA))
+        } else if (game.votesOptionB.length > game.votesOptionA.length) {
+            winner = JSON.parse(JSON.stringify(game.optionB))
+        } else {
+            console.log("It's a tie, play round again")
+        }
+        return winner;
+    
+    //     callbackFunction(winner)
+    // }    
 }
 
 export function getGame(gamePin) {
+    if (api) {
+        fetch('http://localhost:5000/game/ABC01')
+        .then(response => response.json())
+    }
     return games[gamePin]
 }
 
@@ -183,7 +195,7 @@ export function startGame(gamePin, user) {
 
 export function isGameReady(gamePin) {
     var game = getGame(gamePin)
-    if (game.status = "open") {
+    if (game.status === "open") {
         return true
     } else {
         return false

@@ -1,21 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaUserAlt } from 'react-icons/fa';
 import './scss/Combate.css';
 import Contender from "./Contender";
 import Winner from "./Winner";
-import { getGame, submitVote, finishRound, getRoundWinner } from './backend/GameSetup.js';
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 export default function CombateM(props) {
-  let defaultTimer = 10;
+  let defaultTimer = 30;
+  const [listening, setListening] = useState(false);
   const [overlayLeft, setOverlayLeft] = useState(null)
   const [overlayRight, setOverlayRight] = useState(null)
   const [noEvents, setNoEvents] = useState(null)
-  const [game, setGame] = useState(getGame(props.gamePin))
+  const [game, setGame] = useState(null)
   const [gameOver, setGameOver] = useState(false)
   const [optionAWon, setOptionAWon] = useState(null)
   const [optionBWon, setOptionBWon] = useState(null)
-  const [roundResult, setRoundResult] = useState(false)
   const [key, setKey] = useState(0)
 
   const renderTime = ({ remainingTime }) => {
@@ -32,77 +31,101 @@ export default function CombateM(props) {
     );
   };
 
+  useEffect(() => {
+    // Get game
+    fetch('http://localhost:5000/game/' + props.gamePin)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.players)
+      setGame(data)
+    })
+  }, [])
+
   function onTimeEnds() {
-      setRoundResult(true)
       setOverlayLeft(null)
       setOverlayRight(null)
-      var roundWinner = getRoundWinner(props.gamePin)
 
-      if (game.optionA.description === roundWinner.description) {
-        setOptionAWon(true)
-        setOptionBWon(false)
-      } else if (game.optionB.description === roundWinner.description) {
-        setOptionAWon(false)
-        setOptionBWon(true)
-      } else {
-        setOptionAWon(true)
-        console.log("its a tie!")
-        console.log(roundWinner)
-      }
-    
+      // Get round winner from the server
+      fetch('http://localhost:5000/game/' +  props.gamePin + "/roundWinner")
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        var roundWinner = data.roundWinner
+
+        if (roundWinner === null) {
+          setOptionAWon(true)
+          console.log("its a tie!")
+          console.log(roundWinner)
+        } else {
+          if (game.optionA.description === roundWinner.description) {
+            setOptionAWon(true)
+            setOptionBWon(false)
+          } else if (game.optionB.description === roundWinner.description) {
+            setOptionAWon(false)
+            setOptionBWon(true)
+          } else {
+            setOptionAWon(true)
+            console.log("its a tie! ?")
+            console.log(roundWinner)
+          }
+        }
+        
+        }) 
+  }
+
+  function submitChoice(option) {
+    console.log("Submiting vote")
+    fetch('http://localhost:5000/game/' +  props.gamePin + "/user/" + props.nickname + "/vote/" + option.description)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+    })
   }
 
   function handleSelectionLeft() {
-    var user = {
-      nickname: props.nickname,
-      isModerator: true
-    }
-
     if (overlayLeft == null) {
       setOverlayLeft(true)
       setOverlayRight(false)
       setNoEvents(true)
-      submitVote(game.pin, user, game.optionA)
-      setGame(getGame(game.pin))
+      submitChoice(game.optionA)
     }
   }
 
   function handleSelectionRight() {
-    var user = {
-      nickname: props.nickname,
-      isModerator: true
-    }
-
     if (overlayRight == null) {
       setOverlayLeft(false)
       setOverlayRight(true)
       setNoEvents(true)
-      submitVote(game.pin, user, game.optionB)
-      setGame(getGame(game.pin))
+      submitChoice(game.optionB)
     }
-  }
-
-  function goToNextRound() {
-    // This need to be specific per user, this version is only to test.
-    var isGameOver = finishRound(game.pin)
-    if (isGameOver) {
-      setGameOver(true)
-    } else {
-      setGame(getGame(game.pin))
-      setKey(prevKey => prevKey + 1)
-    }
-    setOverlayLeft(null)
-    setOverlayRight(null)
-    setOptionAWon(null)
-    setOptionBWon(null)
-    setNoEvents(null)
-    setRoundResult(false)
   }
 
   function handleNext(event) {
     event.preventDefault();
-    goToNextRound();
+    console.log("Go to next round")
+    fetch('http://localhost:5000/game/' + props.gamePin + "/finishRound")
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      var isGameOver = data.status === "game_over"
+      if (isGameOver) {
+        setGameOver(true)
+      } else {
+        setGame(data)
+        setKey(prevKey => prevKey + 1)
+      }
+      setOverlayLeft(null)
+      setOverlayRight(null)
+      setOptionAWon(null)
+      setOptionBWon(null)
+      setNoEvents(null)
+    })
   }
+
+  if (game === null) {
+    return (<div></div>)
+  } else {
+
 
   return (
     <div className="Combate d-flex-center flex-column">
@@ -159,4 +182,5 @@ export default function CombateM(props) {
       </footer>
     </div >
   );
+  } 
 }

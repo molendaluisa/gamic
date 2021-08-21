@@ -1,50 +1,68 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaUserAlt } from 'react-icons/fa';
 import './scss/WaitingPlayers.css';
-import { getGame, startGame } from "./backend/GameSetup";
 import CombateM from "./CombateM";
 
 
 export default function WaitingPlayers(props) {
-  const [gamePin, setGamePin] = useState(props.gamePin)
+  const [listening, setListening] = useState(false);
   const [players, setPlayers] = useState(null)
   const [gameStatus, setGameStatus] = useState(null)
 
+  let eventSource = undefined;
+
+  useEffect(() => {
+    if (players === null) {
+      // Get game
+        fetch('http://localhost:5000/game/' + props.gamePin)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data.players)
+            if (data.players.length !== 0) {
+              setPlayers(data.players)
+            }
+          })
+    }
+  
+    // Listen for notification on users joining and update list of users
+    if (!listening) {
+        eventSource = new EventSource('http://localhost:5000/game/' + props.gamePin + "/listerToServer")
+        eventSource.onmessage = (event) => {
+            const players = JSON.parse(event.data);
+            setPlayers(players)
+        }
+        eventSource.onerror = (err) => {
+            console.error("EventSource failed:", err);
+            eventSource.close();
+        }
+        setListening(true)
+    }
+    return () => {
+            eventSource.close();
+            console.log("event closed")
+    }
+  }, [])
+
   function handleStart(event) {
     event.preventDefault()
-    startGame(gamePin, { nickname: props.nickname, isModerator: true })
-    setGameStatus(getGame(props.gamePin))
+    // Send info to server to start game
+    fetch('http://localhost:5000/game/' + props.gamePin + "/user/" + props.nickname + "/start")
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      setGameStatus("game on");
+    }) 
   }
-
-  function refreshGamePlayers() {
-    var game = getGame(gamePin)
-    game.players = [
-      {
-        nickname: "Luisita",
-        isModerator: false
-      },
-      {
-        nickname: "Ale",
-        isModerator: false
-      },
-      {
-        nickname: "Toti",
-        isModerator: true
-      }
-    ]
-    setPlayers(game.players)
-  }
-  setInterval(refreshGamePlayers, 5000);
 
   var playersItems = null
   if (players) {
     playersItems = players.map((player) =>
-      <li>{player.nickname}</li>
+      <li key={player.nickname}>{player.nickname}</li>
     );
   }
   if (gameStatus) {
     return (
-      <CombateM gamePin={gamePin} nickname={props.nickname} />
+      <CombateM gamePin={props.gamePin} nickname={props.nickname} />
     );
   } else {
     return (
@@ -53,7 +71,7 @@ export default function WaitingPlayers(props) {
         {/* NAV */}
         <nav className="bar">
           <h2 className="join-banner">Join at </h2><span className="link">www.gamic.com</span>
-          <h1 className="join-banner">Game PIN:</h1><span className="link">ABC01</span>
+          <h1 className="join-banner">Game PIN:</h1><span className="link">{props.gamePin}</span>
         </nav>
 
 

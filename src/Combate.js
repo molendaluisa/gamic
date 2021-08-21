@@ -3,71 +3,110 @@ import { FaUserAlt } from 'react-icons/fa';
 import './scss/Combate.css';
 import Contender from "./Contender";
 import Winner from "./Winner";
-import { getGame, submitVote, finishRound } from './backend/GameSetup.js';
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 
 export default function Combate(props) {
-  let timer = 50;
-  const [counter, setCounter] = useState(10)
+  let defaultTimer = 30;
+  const [listening, setListening] = useState(false);
   const [overlayLeft, setOverlayLeft] = useState(null)
   const [overlayRight, setOverlayRight] = useState(null)
   const [noEvents, setNoEvents] = useState(null)
-  const [game, setGame] = useState(getGame(props.gamePin))
+  const [game, setGame] = useState(null)
   const [gameOver, setGameOver] = useState(false)
+  const [next, setNext] = useState(null)
+  // const [optionAWon, setOptionAWon] = useState(null)
+  // const [optionBWon, setOptionBWon] = useState(null)
+  const [key, setKey] = useState(0)
 
+  let eventSource = undefined;
+
+  const renderTime = ({ remainingTime }) => {
+    if (remainingTime === 0) {
+      return <div className="timer">Too lale...</div>;
+    }
+  
+    return (
+      <div className="timer">
+        <div className="text">Remaining</div>
+        <div className="value">{remainingTime}</div>
+        <div className="text">seconds</div>
+      </div>
+    );
+  };
 
   React.useEffect(() => {
-    if (counter === 0) {
-      goToNextRound()
+    if (game=== null) {
+    // Get game
+    fetch('http://localhost:5000/game/' + props.gamePin)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.players)
+      setGame(data)
+    })
+  }
+    // Listen for notification on next round
+    if (!listening) {
+      eventSource = new EventSource('http://localhost:5000/game/' + props.gamePin + "/usersNotifications")
+        eventSource.onmessage = (event) => {
+            console.log("NExt round!")
+            // setGameStatus("open")
+            fetch('http://localhost:5000/game/' + props.gamePin)
+            .then(response => response.json())
+            .then(data => {
+              console.log(data.players)
+              setGame(data)
+            })
+        }
+        eventSource.onerror = (err) => {
+            console.error("EventSource failed:", err);
+            eventSource.close();
+        }
+        setListening(true)
     }
-    const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-    return () => clearInterval(timer);
-  }, [counter]);
+    return () => {
+            eventSource.close();
+            console.log("event closed")
+    }
+  }, []);
+
+  function onTimeEnds() {
+    setOverlayLeft(null)
+    setOverlayRight(null)
+
+    // Get round winner from the server
+    // Wait for next round
+  }
+
+  function submitChoice(option) {
+    console.log("Submiting vote")
+    fetch('http://localhost:5000/game/' +  props.gamePin + "/user/" + props.nickname + "/vote/" + option.description)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+    })
+  }
 
   function handleSelectionLeft() {
-    // Once a selection is done is should not be possible to select another one
-    var user = {
-      nickname: props.nickname,
-    }
-
     if (overlayLeft == null) {
       setOverlayLeft(true)
       setOverlayRight(false)
       setNoEvents(true)
-      submitVote(game.pin, user, game.optionA)
-      setGame(getGame(game.pin))
+      submitChoice(game.optionA)
     }
   }
 
   function handleSelectionRight() {
-    // Once a selection is done is should not be possible to select another one
-    var user = {
-      nickname: props.nickname,
-    }
-
     if (overlayRight == null) {
       setOverlayLeft(false)
       setOverlayRight(true)
       setNoEvents(true)
-      submitVote(game.pin, user, game.optionB)
-      setGame(getGame(game.pin))
+      submitChoice(game.optionB)
     }
   }
-
-  function goToNextRound() {
-    // This need to be specific per user, this version is only to test.
-    var isGameOver = finishRound(game.pin)
-    if (isGameOver) {
-      setGameOver(true)
-    } else {
-      setGame(getGame(game.pin))
-      setCounter(10)
-    }
-    setOverlayLeft(null)
-    setOverlayRight(null)
-    setNoEvents(null)
-    setCounter(timer)
-  }
+  if (game === null) {
+    return (<div></div>)
+  } else {
 
   return (
     <div className="Combate d-flex-center flex-column">
@@ -97,20 +136,22 @@ export default function Combate(props) {
       <footer className="bar">
         <ul className="fot-ul">
           <li className="fot-li">{game.currentRound}/{game.totalRounds}</li>
-          {gameOver ? null :
-            <li className="counter fot-li">
-              <div id="countdown">
-                <div id="countdown-number">{counter}</div>
-                <svg className="circle-counter">
-                  <circle r="18" cx="20" cy="20"></circle>
-                </svg>
-              </div>
-            </li>
-          }
+          <div className="timer-wrapper">
+            <CountdownCircleTimer
+              key={key}
+              isPlaying
+              duration={defaultTimer}
+              colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+              onComplete={onTimeEnds}
+            >
+              {renderTime}
+            </CountdownCircleTimer>
+          </div>
           <li className="fot-li">1 <FaUserAlt /> - PIN: {props.gamePin}</li>
         </ul>
       </footer>
 
     </div >
   );
+        }
 }

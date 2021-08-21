@@ -20,7 +20,7 @@ export default function Contender(props) {
     <div className={divClasses}>
       <div className="Contender" onClick={props.handleSelection} >
         <div className={cardClasses}>
-          <img src={props.optionInfo.imageUrl} alt="contender photo"></img>
+          <img src={props.optionInfo.imageUrl} alt="contender"></img>
           <div className="caption">{props.optionInfo.description}</div>
         </div>
       </div >

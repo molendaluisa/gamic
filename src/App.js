@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import './scss/App.css';
 import Welcome from './Welcome';
-import { getGame } from './backend/GameSetup.js';
 
 
 export default function App() {
@@ -12,13 +11,18 @@ export default function App() {
 
   function checkEnter(event) {
     event.preventDefault();
-    var game = getGame(pinGame)
 
-    if (game == null || nickname == null) {
-      setErrorMsg(true)
-    } else {
-      setReady(true);
-    }
+    // Join game as player
+    fetch('http://localhost:5000/game/' + pinGame + "/join/" + nickname)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      if (data == null || nickname == null) {
+        setErrorMsg(true)
+      } else {
+        setReady(true);
+      }
+    }) 
   };
 
   function handlePinChange(event) {
@@ -47,5 +51,3 @@ export default function App() {
     </div >
   );
 }
-
-

@@ -1,24 +1,29 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import './scss/App.css';
 import WaitingPlayers from './WaitingPlayers';
-import { getGame } from './backend/GameSetup.js';
+// import { getGame } from './backend/GameSetup.js';
 
 
 export default function AppM(props) {
   const [ready, setReady] = useState(false);
-  const [pinGame, setPinGame] = useState(null);
+  const [pinGame, setPinGame] = useState(props.gamePin);
   const [nickname, setNickname] = useState(null);
   const [errorMsg, setErrorMsg] = useState(false);
 
   function checkEnter(event) {
     event.preventDefault();
-    var game = getGame(pinGame)
 
-    if (game == null || nickname == null) {
-      setErrorMsg(true)
-    } else {
-      setReady(true);
-    }
+    // Join game as moderator
+    fetch('http://localhost:5000/game/' + pinGame + "/joinModerator/" + nickname)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      if (data.moderator == null || nickname == null) {
+        setErrorMsg(true)
+      } else {
+        setReady(true);
+      }
+    }) 
   };
 
   function handlePinChange(event) {

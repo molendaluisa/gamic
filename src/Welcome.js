@@ -1,7 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import './scss/Welcome.css';
+import Combate from "./Combate";
 
 export default function Welcome(props) {
+  const [listening, setListening] = useState(false);
+  const [gamePin, setGamePin] = useState(props.gamePin)
+  const [gameStatus, setGameStatus] = useState(null)
+
+  let eventSource = undefined;
+
+
+  useEffect(() => {  
+    // Listen for notification on game start
+    if (!listening) {
+      eventSource = new EventSource('http://localhost:5000/game/' + props.gamePin + "/usersNotifications")
+        eventSource.onmessage = (event) => {
+            console.log("Game om!")
+            eventSource.close();
+            setGameStatus("open")
+
+        }
+        eventSource.onerror = (err) => {
+            console.error("EventSource failed:", err);
+            eventSource.close();
+        }
+        setListening(true)
+    }
+    return () => {
+            eventSource.close();
+            console.log("event closed")
+    }
+  }, [])
+
+  if (gameStatus === 'open') {
+    return (
+      <Combate gamePin={gamePin} nickname={props.nickname}/>
+    );
+  } else {
+
   return (
     <div className="Welcome d-flex-center">
 
@@ -29,4 +65,5 @@ export default function Welcome(props) {
       </footer>
     </div>
   );
+  }
 }
