@@ -31,7 +31,7 @@ export default function CombateM(props) {
 
   useEffect(() => {
     // Get game
-    fetch('http://localhost:5000/game/' + props.gamePin)
+    fetch('https://boiling-wave-10637.herokuapp.com/game/' + props.gamePin)
     .then(response => response.json())
     .then(data => {
       console.log(data.players)
@@ -44,7 +44,7 @@ export default function CombateM(props) {
       setOverlayRight(null)
 
       // Get round winner from the server
-      fetch('http://localhost:5000/game/' +  props.gamePin + "/roundWinner")
+      fetch('https://boiling-wave-10637.herokuapp.com/game/' +  props.gamePin + "/roundWinner")
       .then(response => response.json())
       .then(data => {
         console.log(data)
@@ -73,7 +73,7 @@ export default function CombateM(props) {
 
   function submitChoice(option) {
     console.log("Submiting vote")
-    fetch('http://localhost:5000/game/' +  props.gamePin + "/user/" + props.nickname + "/vote/" + option.description)
+    fetch('https://boiling-wave-10637.herokuapp.com/game/' +  props.gamePin + "/user/" + props.nickname + "/vote/" + option.description)
     .then(response => response.json())
     .then(data => {
       console.log(data)
@@ -101,7 +101,7 @@ export default function CombateM(props) {
   function handleNext(event) {
     event.preventDefault();
     console.log("Go to next round")
-    fetch('http://localhost:5000/game/' + props.gamePin + "/finishRound")
+    fetch('https://boiling-wave-10637.herokuapp.com/game/' + props.gamePin + "/finishRound")
     .then(response => response.json())
     .then(data => {
       console.log(data)

@@ -13,7 +13,7 @@ export default function Welcome(props) {
   useEffect(() => {  
     // Listen for notification on game start
     if (!listening) {
-      eventSource = new EventSource('http://localhost:5000/game/' + props.gamePin + "/usersNotifications")
+      eventSource = new EventSource('https://boiling-wave-10637.herokuapp.com/game/' + props.gamePin + "/usersNotifications")
         eventSource.onmessage = (event) => {
             console.log("Game om!")
             eventSource.close();

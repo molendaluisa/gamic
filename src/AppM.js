@@ -14,7 +14,7 @@ export default function AppM(props) {
     event.preventDefault();
 
     // Join game as moderator
-    fetch('http://localhost:5000/game/' + pinGame + "/joinModerator/" + nickname)
+    fetch('https://boiling-wave-10637.herokuapp.com/game/' + pinGame + "/joinModerator/" + nickname)
     .then(response => response.json())
     .then(data => {
       console.log(data)

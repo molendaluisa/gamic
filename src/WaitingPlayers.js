@@ -14,7 +14,7 @@ export default function WaitingPlayers(props) {
   useEffect(() => {
     if (players === null) {
       // Get game
-        fetch('http://localhost:5000/game/' + props.gamePin)
+        fetch('https://boiling-wave-10637.herokuapp.com/game/' + props.gamePin)
           .then(response => response.json())
           .then(data => {
             console.log(data.players)
@@ -26,7 +26,7 @@ export default function WaitingPlayers(props) {
   
     // Listen for notification on users joining and update list of users
     if (!listening) {
-        eventSource = new EventSource('http://localhost:5000/game/' + props.gamePin + "/listerToServer")
+        eventSource = new EventSource('https://boiling-wave-10637.herokuapp.com/game/' + props.gamePin + "/listerToServer")
         eventSource.onmessage = (event) => {
             const players = JSON.parse(event.data);
             setPlayers(players)
@@ -46,7 +46,7 @@ export default function WaitingPlayers(props) {
   function handleStart(event) {
     event.preventDefault()
     // Send info to server to start game
-    fetch('http://localhost:5000/game/' + props.gamePin + "/user/" + props.nickname + "/start")
+    fetch('https://boiling-wave-10637.herokuapp.com/game/' + props.gamePin + "/user/" + props.nickname + "/start")
     .then(response => response.json())
     .then(data => {
       console.log(data)

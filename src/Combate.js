@@ -38,7 +38,7 @@ export default function Combate(props) {
   React.useEffect(() => {
     if (game=== null) {
     // Get game
-    fetch('http://localhost:5000/game/' + props.gamePin)
+    fetch('https://boiling-wave-10637.herokuapp.com/game/' + props.gamePin)
     .then(response => response.json())
     .then(data => {
       console.log(data.players)
@@ -47,11 +47,11 @@ export default function Combate(props) {
   }
     // Listen for notification on next round
     if (!listening) {
-      eventSource = new EventSource('http://localhost:5000/game/' + props.gamePin + "/usersNotifications")
+      eventSource = new EventSource('https://boiling-wave-10637.herokuapp.com/game/' + props.gamePin + "/usersNotifications")
         eventSource.onmessage = (event) => {
             console.log("NExt round!")
             // setGameStatus("open")
-            fetch('http://localhost:5000/game/' + props.gamePin)
+            fetch('https://boiling-wave-10637.herokuapp.com/game/' + props.gamePin)
             .then(response => response.json())
             .then(data => {
               console.log(data.players)
@@ -80,7 +80,7 @@ export default function Combate(props) {
 
   function submitChoice(option) {
     console.log("Submiting vote")
-    fetch('http://localhost:5000/game/' +  props.gamePin + "/user/" + props.nickname + "/vote/" + option.description)
+    fetch('https://boiling-wave-10637.herokuapp.com/game/' +  props.gamePin + "/user/" + props.nickname + "/vote/" + option.description)
     .then(response => response.json())
     .then(data => {
       console.log(data)

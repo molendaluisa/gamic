@@ -13,7 +13,7 @@ export default function App() {
     event.preventDefault();
 
     // Join game as player
-    fetch('http://localhost:5000/game/' + pinGame + "/join/" + nickname)
+    fetch('https://boiling-wave-10637.herokuapp.com/game/' + pinGame + "/join/" + nickname)
     .then(response => response.json())
     .then(data => {
       console.log(data)

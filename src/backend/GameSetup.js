@@ -125,7 +125,7 @@ export function getRoundWinner(gamePin, callbackFunction) {
 
 export function getGame(gamePin) {
     if (api) {
-        fetch('http://localhost:5000/game/ABC01')
+        fetch('https://boiling-wave-10637.herokuapp.com/game/ABC01')
         .then(response => response.json())
     }
     return games[gamePin]
