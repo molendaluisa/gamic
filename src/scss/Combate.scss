@@ -37,56 +37,9 @@ h1 {
   margin: 0 80px;
 }
 
-.fot-items {
-  list-style-type: none;
-  padding: 20px 0;
-  margin: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.fot-items li {
-  padding: 0 30px;
-  font-size: 24px;
-  width: 600px;
-}
-
-.fot-items li:last-child {
-  text-align: end;
-}
-
-#countdown {
-  position: relative;
-  margin: auto;
-  height: 40px;
-  width: 40px;
-  text-align: center;
-}
-
-#countdown-number {
-  color: $darkGray;
-  display: inline-block;
-  line-height: 40px;
-}
-
-.circle-counter {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 40px;
-  height: 40px;
-  transform: rotateY(-180deg) rotateZ(-90deg);
-}
-
-svg circle {
-  stroke-dasharray: 113px;
-  stroke-dashoffset: 0px;
-  stroke-linecap: round;
-  stroke-width: 2px;
-  stroke: $darkGray;
-  fill: none;
-  animation: countdown 30s linear infinite forwards;
+.value {
+  font-family: $chelsea;
+  font-size: 34px;
 }
 
 .btn-next {
