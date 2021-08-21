@@ -7,10 +7,7 @@ import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 export default function CombateM(props) {
   let defaultTimer = 30;
-<<<<<<< HEAD
   const [listening, setListening] = useState(false);
-=======
->>>>>>> fc13c1c7fd2c95979b6470541990e5ffd174bb4c
   const [overlayLeft, setOverlayLeft] = useState(null)
   const [overlayRight, setOverlayRight] = useState(null)
   const [noEvents, setNoEvents] = useState(null)
@@ -43,7 +40,6 @@ export default function CombateM(props) {
   }, [])
 
   function onTimeEnds() {
-<<<<<<< HEAD
       setOverlayLeft(null)
       setOverlayRight(null)
 
@@ -73,25 +69,6 @@ export default function CombateM(props) {
         }
         
         }) 
-=======
-    setRoundResult(true)
-    setOverlayLeft(null)
-    setOverlayRight(null)
-    var roundWinner = getRoundWinner(props.gamePin)
-
-    if (game.optionA.description === roundWinner.description) {
-      setOptionAWon(true)
-      setOptionBWon(false)
-    } else if (game.optionB.description === roundWinner.description) {
-      setOptionAWon(false)
-      setOptionBWon(true)
-    } else {
-      setOptionAWon(true)
-      console.log("its a tie!")
-      console.log(roundWinner)
-    }
-
->>>>>>> fc13c1c7fd2c95979b6470541990e5ffd174bb4c
   }
 
   function submitChoice(option) {
