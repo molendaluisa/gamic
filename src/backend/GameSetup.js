@@ -54,7 +54,7 @@ const gameSetup = {
         },
         {
             description: "COVID-19",
-            imageUrl: "https://images.pexels.com/photos/4113084/pexels-photo-4113084.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+            imageUrl: "https://images.pexels.com/photos/3993212/pexels-photo-3993212.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
         },
         {
             description: "Teddy Bears",
@@ -109,7 +109,7 @@ export function startGame(gamePin, user) {
 export function handleOptionSelection(gamePin, isOptionASelected, isOptionBSelected) {
     var game = getGame(gamePin)
 
-    var new_option = game.options[game.currentRound -1]
+    var new_option = game.options[game.currentRound - 1]
 
     if (isOptionASelected) {
         console.log("option A selected")
