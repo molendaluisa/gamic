@@ -2,10 +2,7 @@ import React from "react";
 import './scss/Contender.css';
 
 export default function Contender(props) {
-  var divClasses = "contender"
   var cardClasses = "polaroid"
-  divClasses = props.status ? divClasses + " overlay" : divClasses
-  divClasses = props.noEvents ? divClasses + " no-events" : divClasses
 
 
   if (props.winner === null) {
@@ -17,8 +14,8 @@ export default function Contender(props) {
   }
 
   return (
-    <div className={divClasses}>
-      <div className="Contender" onClick={props.handleSelection} >
+    <div className="contender">
+      <div className="Contender" onClick={props.handleSelection}>
         <div className={cardClasses}>
           <img src={props.optionInfo.imageUrl} alt="contender"></img>
           <div className="caption">{props.optionInfo.description}</div>
