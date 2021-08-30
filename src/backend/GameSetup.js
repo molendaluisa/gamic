@@ -102,6 +102,28 @@ export function startGame(gamePin, user) {
     }
 }
 
+export function handleOptionSelection(gamePin, isOptionASelected, isOptionBSelected) {
+    var game = getGame(gamePin)
+
+    var new_option = game.options[game.currentRound -1]
+
+    if (isOptionASelected) {
+        console.log("option A selected")
+        // Get the next option and set it in optionB
+        game.optionB = new_option
+        // Go to next round
+        game.currentRound = game.currentRound + 1
+    } else if (isOptionBSelected) {
+        console.log("option B selected")
+        // Get the next option and set it in optionA
+        game.optionA = new_option
+        game.currentRound = game.currentRound + 1
+    }
+    else {
+        console.log("Nothing selected")
+    }
+}
+
 var games = {
     DHL01: createGame("DHL01", gameSetup),
     DHL02: createGame("DHL02", gameSetup),

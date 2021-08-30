@@ -1,65 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FaUserAlt } from 'react-icons/fa';
 import './scss/WaitingPlayers.css';
 import CombateM from "./CombateM";
 
 
 export default function WaitingPlayers(props) {
-  const [listening, setListening] = useState(false);
-  const [players, setPlayers] = useState(null)
   const [gameStatus, setGameStatus] = useState(null)
 
-  let eventSource = undefined;
-
-  // useEffect(() => {
-  //   if (players === null) {
-  //     // Get game
-  //       fetch('https://boiling-wave-10637.herokuapp.com/game/' + props.gamePin)
-  //         .then(response => response.json())
-  //         .then(data => {
-  //           console.log(data.players)
-  //           if (data.players.length !== 0) {
-  //             setPlayers(data.players)
-  //           }
-  //         })
-  //   }
   
-  //   // Listen for notification on users joining and update list of users
-  //   if (!listening) {
-  //       eventSource = new EventSource('https://boiling-wave-10637.herokuapp.com/game/' + props.gamePin + "/listerToServer")
-  //       eventSource.onmessage = (event) => {
-  //           const players = JSON.parse(event.data);
-  //           setPlayers(players)
-  //       }
-  //       eventSource.onerror = (err) => {
-  //           console.error("EventSource failed:", err);
-  //           eventSource.close();
-  //       }
-  //       setListening(true)
-  //   }
-  //   return () => {
-  //           eventSource.close();
-  //           console.log("event closed")
-  //   }
-  // }, [])
-
   function handleStart(event) {
     event.preventDefault()
-    // Send info to server to start game
-    // fetch('https://boiling-wave-10637.herokuapp.com/game/' + props.gamePin + "/user/" + props.nickname + "/start")
-    // .then(response => response.json())
-    // .then(data => {
-    //   console.log(data)
-      setGameStatus("game on");
-    // }) 
+    setGameStatus("game on")
+
   }
 
-  // var playersItems = null
-  // if (players) {
-  //   playersItems = players.map((player) =>
-  //     <li key={player.nickname}>{player.nickname}</li>
-  //   );
-  // }
   if (gameStatus) {
     return (
       <CombateM gamePin={props.gamePin} nickname={props.nickname} />
@@ -86,9 +40,6 @@ export default function WaitingPlayers(props) {
           <h3>Make yourself at home while we wait for players to join</h3>
         </div>
         {/* } */}
-
-
-
 
         {/* FOOTER */}
         <footer className="bar wbutton">
