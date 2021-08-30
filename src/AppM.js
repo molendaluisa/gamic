@@ -38,11 +38,11 @@ export default function AppM(props) {
             <input type="text" placeholder="Nickname" className="input" onChange={handleNicknameChange} />
             <button className="btn btn-primary" onClick={checkEnter}>Enter</button>
           </form>
-          {errorMsg ? <div><p className="error-msg-wrapper">Game not found OR Nickname invalid Moderator</p></div> : null}
+          {errorMsg ? <div><p className="error-msg-wrapper">Game not found OR Nickname invalid</p></div> : null}
         </div>
-      }   
+      }
       {ready ?
-        <WaitingPlayers gamePin={pinGame} nickname={nickname}/> : null}
+        <WaitingPlayers gamePin={pinGame} nickname={nickname} /> : null}
     </div >
   );
 }
