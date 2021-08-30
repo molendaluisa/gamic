@@ -7,10 +7,6 @@ import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 export default function CombateM(props) {
   let defaultTimer = 30;
-  const [listening, setListening] = useState(false);
-  const [overlayLeft, setOverlayLeft] = useState(null)
-  const [overlayRight, setOverlayRight] = useState(null)
-  const [noEvents, setNoEvents] = useState(null)
   const [game, setGame] = useState(null)
   const [gameOver, setGameOver] = useState(false)
   const [optionAWon, setOptionAWon] = useState(null)
@@ -32,19 +28,17 @@ export default function CombateM(props) {
   useEffect(() => {
     // Get game
     fetch('https://boiling-wave-10637.herokuapp.com/game/' + props.gamePin)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data.players)
-      setGame(data)
-    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.players)
+        setGame(data)
+      })
   }, [])
 
   function onTimeEnds() {
-      setOverlayLeft(null)
-      setOverlayRight(null)
 
-      // Get round winner from the server
-      fetch('https://boiling-wave-10637.herokuapp.com/game/' +  props.gamePin + "/roundWinner")
+    // Get round winner from the server
+    fetch('https://boiling-wave-10637.herokuapp.com/game/' + props.gamePin + "/roundWinner")
       .then(response => response.json())
       .then(data => {
         console.log(data)
@@ -63,37 +57,36 @@ export default function CombateM(props) {
             setOptionBWon(true)
           } else {
             setOptionAWon(true)
+            setOptionBWon(false)
             console.log("its a tie! ?")
             console.log(roundWinner)
           }
         }
-        
-        }) 
+
+      })
   }
 
   function submitChoice(option) {
     console.log("Submiting vote")
-    fetch('https://boiling-wave-10637.herokuapp.com/game/' +  props.gamePin + "/user/" + props.nickname + "/vote/" + option.description)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-    })
+    fetch('https://boiling-wave-10637.herokuapp.com/game/' + props.gamePin + "/user/" + props.nickname + "/vote/" + option.description)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+      })
   }
 
   function handleSelectionLeft() {
-    if (overlayLeft == null) {
-      setOverlayLeft(true)
-      setOverlayRight(false)
-      setNoEvents(true)
+    if (optionAWon == null) {
+      setOptionAWon(true)
+      setOptionBWon(false)
       submitChoice(game.optionA)
     }
   }
 
   function handleSelectionRight() {
-    if (overlayRight == null) {
-      setOverlayLeft(false)
-      setOverlayRight(true)
-      setNoEvents(true)
+    if (optionBWon == null) {
+      setOptionAWon(false)
+      setOptionBWon(true)
       submitChoice(game.optionB)
     }
   }
@@ -102,22 +95,19 @@ export default function CombateM(props) {
     event.preventDefault();
     console.log("Go to next round")
     fetch('https://boiling-wave-10637.herokuapp.com/game/' + props.gamePin + "/finishRound")
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-      var isGameOver = data.status === "game_over"
-      if (isGameOver) {
-        setGameOver(true)
-      } else {
-        setGame(data)
-        setKey(prevKey => prevKey + 1)
-      }
-      setOverlayLeft(null)
-      setOverlayRight(null)
-      setOptionAWon(null)
-      setOptionBWon(null)
-      setNoEvents(null)
-    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        var isGameOver = data.status === "game_over"
+        if (isGameOver) {
+          setGameOver(true)
+        } else {
+          setGame(data)
+          setKey(prevKey => prevKey + 1)
+        }
+        setOptionAWon(null)
+        setOptionBWon(null)
+      })
   }
 
   if (game === null) {
@@ -125,52 +115,52 @@ export default function CombateM(props) {
   } else {
 
 
-  return (
-    <div className="Combate d-flex-center flex-column">
+    return (
+      <div className="Combate d-flex-center flex-column">
 
-      {/* NAV */}
-      <nav className="bar">
-        <h1>{gameOver ? "Winner!!!" : `Round #${game.currentRound} - What would you save?`} </h1>
-        <button className="btn btn-primary btn-start btn-next" onClick={handleNext}>Next</button>
-      </nav>
+        {/* NAV */}
+        <nav className="bar">
+          <h1>{gameOver ? "Winner!!!" : `Round #${game.currentRound} - What would you save?`} </h1>
+          <button className="btn btn-primary btn-start btn-next" onClick={handleNext}>Next</button>
+        </nav>
 
 
-      {/* MIDDLE SECTION */}
-      <div className="middle-section">
-        {gameOver ?
-          <div className="winner-wrapper">
-            <Winner optionInfo={game.roundWinner} gameOver={gameOver} />
-          </div>
-          :
-          <div className="battle-wrapper d-flex-center">
-            <Contender optionInfo={game.optionA} handleSelection={handleSelectionLeft} status={overlayLeft} noEvents={noEvents} winner={optionAWon} />
-            <div className="versus"> VS </div>
-            <Contender optionInfo={game.optionB} handleSelection={handleSelectionRight} status={overlayRight} noEvents={noEvents} winner={optionBWon} />
-          </div>
-        }
-      </div>
+        {/* MIDDLE SECTION */}
+        <div className="middle-section">
+          {gameOver ?
+            <div className="winner-wrapper">
+              <Winner optionInfo={game.roundWinner} gameOver={gameOver} />
+            </div>
+            :
+            <div className="battle-wrapper d-flex-center">
+              <Contender optionInfo={game.optionA} handleSelection={handleSelectionLeft} winner={optionAWon} />
+              <div className="versus"> VS </div>
+              <Contender optionInfo={game.optionB} handleSelection={handleSelectionRight} winner={optionBWon} />
+            </div>
+          }
+        </div>
 
-      {/* FOOTER */}
-      <footer className="bar">
-        <ul className="fot-ul">
-          <li className="fot-li">{game.currentRound}/{game.totalRounds}</li>
-          <div className="timer-wrapper">
-            <CountdownCircleTimer
-              key={key}
-              isPlaying
-              duration={defaultTimer}
-              colors={[["#000000"]]}
-              onComplete={onTimeEnds}
-              size={60}
-              strokeWidth={5}
-            >
-              {renderTime}
-            </CountdownCircleTimer>
-          </div>
-          <li className="fot-li">1 <FaUserAlt /> - PIN: {props.gamePin}</li>
-        </ul>
-      </footer>
-    </div >
-  );
-  } 
+        {/* FOOTER */}
+        <footer className="bar">
+          <ul className="fot-ul">
+            <li className="fot-li">{game.currentRound}/{game.totalRounds}</li>
+            <div className="timer-wrapper">
+              <CountdownCircleTimer
+                key={key}
+                isPlaying
+                duration={defaultTimer}
+                colors={[["#000000"]]}
+                //onComplete={onTimeEnds}
+                size={60}
+                strokeWidth={5}
+              >
+                {renderTime}
+              </CountdownCircleTimer>
+            </div>
+            <li className="fot-li"><FaUserAlt /> - PIN: {props.gamePin}</li>
+          </ul>
+        </footer>
+      </div >
+    );
+  }
 }
