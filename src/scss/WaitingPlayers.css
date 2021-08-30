@@ -266,6 +266,7 @@ nav {
 .waiting-center {
   color: white;
   text-align: center;
+  margin: 0 120px;
 }
 
 .join-banner {
@@ -310,5 +311,13 @@ p {
           flex: 1 0 20%;
   padding: 10px;
   text-align: center;
+}
+
+h2 {
+  font-size: 44px;
+}
+
+h3 {
+  font-size: 30px;
 }
 /*# sourceMappingURL=WaitingPlayers.css.map */
