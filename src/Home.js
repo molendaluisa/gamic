@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main>
       <Switch>
-        <Route path="/" component={App} exact />
+        <Route path="/" component={AppM} exact />
         <Route path="/moderator" component={AppM} />
         <Route path="/joinGame" component={App} />
       </Switch>

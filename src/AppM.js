@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './scss/App.css';
 import WaitingPlayers from './WaitingPlayers';
-// import { getGame } from './backend/GameSetup.js';
+import { getGame } from './backend/GameSetup.js';
 
 
 export default function AppM(props) {
@@ -12,18 +12,12 @@ export default function AppM(props) {
 
   function checkEnter(event) {
     event.preventDefault();
-
-    // Join game as moderator
-    fetch('https://boiling-wave-10637.herokuapp.com/game/' + pinGame + "/joinModerator/" + nickname)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-      if (data.moderator == null || nickname == null) {
-        setErrorMsg(true)
-      } else {
-        setReady(true);
-      }
-    }) 
+    var game = getGame(pinGame)
+    if (game == null || nickname == null) {
+      setErrorMsg(true)
+    } else {
+      setReady(true);
+    }
   };
 
   function handlePinChange(event) {
