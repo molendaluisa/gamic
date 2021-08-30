@@ -35,6 +35,9 @@ export default function CombateM(props) {
     setOptionAWon(null)
     setOptionBWon(null)
     setRestartTimer(restartTimer+1)
+    if (game.status === "game_over") {
+      setGameOver(true)
+    }
   }
 
   if (game === null) {

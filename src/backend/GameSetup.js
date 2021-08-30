@@ -111,17 +111,29 @@ export function handleOptionSelection(gamePin, isOptionASelected, isOptionBSelec
 
     var new_option = game.options[game.currentRound - 1]
 
+
+    if (game.currentRound === game.totalRounds) {
+        game.status = "game_over"
+    }
+
     if (isOptionASelected) {
         console.log("option A selected")
+        game.roundWinner = game.optionA
         // Get the next option and set it in optionB
         game.optionB = new_option
         // Go to next round
-        game.currentRound = game.currentRound + 1
+        if (game.currentRound < game.totalRounds) {
+            game.currentRound = game.currentRound + 1
+        }
+
     } else if (isOptionBSelected) {
         console.log("option B selected")
+        game.roundWinner = game.optionB
         // Get the next option and set it in optionA
         game.optionA = new_option
-        game.currentRound = game.currentRound + 1
+        if (game.currentRound < game.totalRounds) {
+            game.currentRound = game.currentRound + 1
+        }
     }
     else {
         console.log("Nothing selected")
