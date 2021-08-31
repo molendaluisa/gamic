@@ -16,6 +16,9 @@ export default function CombateM(props) {
     if (optionAWon == null) {
       setOptionAWon(true)
       setOptionBWon(false)
+    } else {
+      setOptionAWon(null)
+      setOptionBWon(null)
     }
   }
 
@@ -23,6 +26,9 @@ export default function CombateM(props) {
     if (optionBWon == null) {
       setOptionAWon(false)
       setOptionBWon(true)
+    } else {
+      setOptionAWon(null)
+      setOptionBWon(null)
     }
   }
 
@@ -34,7 +40,7 @@ export default function CombateM(props) {
     setGame(getGame(props.gamePin))
     setOptionAWon(null)
     setOptionBWon(null)
-    setRestartTimer(restartTimer+1)
+    setRestartTimer(restartTimer + 1)
     if (game.status === "game_over") {
       setGameOver(true)
     }
@@ -75,18 +81,18 @@ export default function CombateM(props) {
           <ul className="fot-ul">
             <li className="fot-li">{game.currentRound}/{game.totalRounds}</li>
             <div className="timer-wrapper">
-           
-            {/* <div ref={countUpRef}/> */}
-            {/* <CountUp start={0} end={100} duration={100} delay={0}>
+
+              {/* <div ref={countUpRef}/> */}
+              {/* <CountUp start={0} end={100} duration={100} delay={0}>
               {({ countUpRef }) => (
                 <div>
                   <span ref={countUpRef} />
                 </div>
               )}
               </CountUp> */}
-               <div>
+              <div>
 
-    </div>
+              </div>
             </div>
             <li className="fot-li"><FaUserAlt /> - PIN: {props.gamePin}</li>
           </ul>
