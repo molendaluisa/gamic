@@ -17,32 +17,40 @@ const gameSetup = {
             imageUrl: "https://images.pexels.com/photos/2776935/pexels-photo-2776935.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=308&w=462&fit=crop"
         },
         {
-            description: "Mosquitos",
-            imageUrl: "https://images.pexels.com/photos/86722/tiger-mosquito-mosquito-asian-tigermucke-sting-86722.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=308&w=462&fit=crop"
+            description: "Timo",
+            imageUrl: "https://media-exp1.licdn.com/dms/image/C4D03AQHyZRzgU6EVqw/profile-displayphoto-shrink_800_800/0/1568711682735?e=1635984000&v=beta&t=iKOK3JKLen48JVPhHgt0RPQK45angWhwCBWGQinecnA"
+        },
+        {
+            description: "Home Office",
+            imageUrl: "https://images.pexels.com/photos/389818/pexels-photo-389818.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=308&w=462&fit=crop"
         },
         {
             description: "Video Games",
             imageUrl: "https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
         },
         {
-            description: "Music",
-            imageUrl: "https://images.pexels.com/photos/1389429/pexels-photo-1389429.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+            description: "Free Food at DHL",
+            imageUrl: "https://images.pexels.com/photos/88924/pexels-photo-88924.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
         },
         {
-            description: "Wi-fi",
-            imageUrl: "https://images.pexels.com/photos/4140208/pexels-photo-4140208.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+            description: "Sing in the Shower",
+            imageUrl: "https://images.pexels.com/photos/3799096/pexels-photo-3799096.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
         },
         {
             description: "Free Wi-fi",
             imageUrl: "https://images.pexels.com/photos/7563691/pexels-photo-7563691.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
         },
         {
-            description: "Timo",
-            imageUrl: "https://media-exp1.licdn.com/dms/image/C4D03AQHyZRzgU6EVqw/profile-displayphoto-shrink_800_800/0/1568711682735?e=1635984000&v=beta&t=iKOK3JKLen48JVPhHgt0RPQK45angWhwCBWGQinecnA"
+            description: "Alberto",
+            imageUrl: "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/016/392/original/albert.png?1630427714"
         },
         {
             description: "Minions",
             imageUrl: "https://images.pexels.com/photos/1606655/pexels-photo-1606655.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=308&w=462&fit=crop"
+        },
+        {
+            description: "Learn German",
+            imageUrl: "https://images.pexels.com/photos/6045366/pexels-photo-6045366.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
         },
         {
             description: "KPIs",
@@ -51,10 +59,6 @@ const gameSetup = {
         {
             description: "Netflix",
             imageUrl: "https://images.pexels.com/photos/2726370/pexels-photo-2726370.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
-        },
-        {
-            description: "COVID-19",
-            imageUrl: "https://images.pexels.com/photos/3993212/pexels-photo-3993212.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
         },
         {
             description: "Teddy Bears",
@@ -69,8 +73,12 @@ const gameSetup = {
             imageUrl: "https://images.pexels.com/photos/386009/pexels-photo-386009.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
         },
         {
+            description: "Coffee",
+            imageUrl: "https://images.pexels.com/photos/1170659/pexels-photo-1170659.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+        },
+        {
             description: "HR Team",
-            imageUrl: "https://images.pexels.com/photos/1595385/pexels-photo-1595385.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260&fit=crop"
+            imageUrl: "https://s3.amazonaws.com/shecodesio-production/uploads/files/000/016/389/original/hr.png?1630427493"
         },
     ],
 }
